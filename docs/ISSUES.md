@@ -17,7 +17,7 @@ This file lists proposed epics and issues for delivering the AI IDE.
   - Acceptance: CI installs dependencies and runs tests.
 
 ## Epic: Autonomous Agent
-- **Issue: Task Planner**
+- **Issue: Task Planner** ✅
   - Accept user goal and produce step-by-step plan.
   - Acceptance: Plan printed to log.
 - **Issue: File Editor**
