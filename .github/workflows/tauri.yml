@@ -1,0 +1,63 @@
+name: Build Tauri App
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: Install NSIS
+        if: runner.os == 'Windows'
+        run: choco install nsis -y
+      - name: Build
+        uses: tauri-apps/tauri-action@v2
+        env:
+          TAURI_ACTION: build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate winget manifest
+        if: runner.os == 'Windows'
+        run: |
+          dotnet tool install --global wingetcreate --version 1.*
+          wingetcreate generate -i src-tauri/target/release/bundle/nsis/*.exe \
+            -u https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/${{ github.event.repository.name }}.exe \
+            -v ${{ github.ref_name }} -o winget
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ runner.os }}-bundle
+          path: src-tauri/target/release/bundle
+      - name: Upload winget manifest
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v3
+        with:
+          name: winget
+          path: winget
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+      - name: Publish release assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: artifacts/**
