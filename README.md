@@ -20,3 +20,7 @@ The current structure is intentionally lightweight. It includes only a README fi
 
 Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.
 
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
