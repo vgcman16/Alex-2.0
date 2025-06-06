@@ -37,6 +37,20 @@ Use this list to verify that your environment is ready:
 - [ ] Desktop app started with `npm start` inside `app`
 - [ ] `OPENROUTER_API_KEY` exported if using AI service
 
+## Running Tests
+
+This project uses [Mocha](https://mochajs.org/) for its test suite. Mocha is
+installed along with the other dependencies, so make sure to run `npm install`
+before invoking the test command.
+
+To install all dependencies and run the tests in one step:
+
+```bash
+npm install && npm test
+```
+
+You can also run the commands individually if preferred.
+
 ## Architecture
 
 The current structure is intentionally lightweight. It includes only a README file, but you can expand it with your own scripts or additional resources. Feel free to adapt the layout to suit your needs.
@@ -51,6 +65,8 @@ Run a manual sync test to see two peers share text data:
 npm install
 npm test
 ```
+
+`npm install` installs Mocha and other dependencies required for the tests.
 
 The test script spawns two Node processes that connect to the public signaling server. One inserts text and the other prints the synchronized content.
 
