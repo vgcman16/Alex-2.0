@@ -26,6 +26,17 @@ in this repository depend on features available in recent Node versions.
    npm start
    ```
 
+## Setup Checklist
+
+Use this list to verify that your environment is ready:
+
+- [ ] Node.js v18 or higher is installed
+- [ ] Repository cloned locally
+- [ ] `npm install` completed at the project root
+- [ ] Dependencies installed in `app` (`cd app && npm install`)
+- [ ] Desktop app started with `npm start` inside `app`
+- [ ] `OPENROUTER_API_KEY` exported if using AI service
+
 ## Architecture
 
 The current structure is intentionally lightweight. It includes only a README file, but you can expand it with your own scripts or additional resources. Feel free to adapt the layout to suit your needs.
