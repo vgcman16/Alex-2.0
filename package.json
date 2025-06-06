@@ -4,7 +4,7 @@
   "description": "Example project for Yjs with Monaco and WebRTC",
   "main": "index.js",
   "scripts": {
-    "test": "node test/manual/sync-test.js"
+    "test": "mocha \"test/**/*.test.js\""
   },
   "engines": {
     "node": ">=18"
@@ -16,5 +16,9 @@
     "y-monaco": "^0.1.6",
     "y-webrtc": "^10.3.0",
     "yjs": "^13.6.9"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.4.0"
   }
 }
