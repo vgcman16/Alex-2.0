@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node test/manual/sync-test.js"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "monaco-editor": "^0.44.0",
     "node-pre-gyp": "^0.17.0",
