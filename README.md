@@ -6,8 +6,9 @@ Alex 2.0 is a simple project used for demonstration purposes. This repository co
 
 ## Getting Started
 
-Make sure you have **Node.js v18 or higher** installed. The Node-based examples
-in this repository depend on features available in recent Node versions.
+Make sure you have **Node.js v18 or higher** installed. Node 18+ is required,
+and the `ws` package provides a WebSocket polyfill (loaded in
+`app/yjs-webrtc.js`) so the WebRTC examples work in a non-browser environment.
 
 1. Clone the repository and change into its directory:
    ```bash
