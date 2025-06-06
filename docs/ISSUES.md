@@ -3,13 +3,13 @@
 This file lists proposed epics and issues for delivering the AI IDE.
 
 ## Epic: MVP
-- **Issue: Electron Shell**
+- **Issue: Electron Shell** ✅
   - Create basic Electron window loading `index.html`.
   - Acceptance: App starts on Windows and macOS.
-- **Issue: Monaco Editor Integration**
+- **Issue: Monaco Editor Integration** ✅
   - Add Monaco editor instance in renderer.
   - Acceptance: Editor displays and supports basic editing.
-- **Issue: OpenRouter Autocomplete**
+- **Issue: OpenRouter Autocomplete** ✅
   - Implement streamed completions using `streamChatCompletion`.
   - Acceptance: Pressing Ctrl+Space triggers completions from API.
 - **Issue: Dev Container & CI**

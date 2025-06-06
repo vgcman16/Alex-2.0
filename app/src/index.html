@@ -9,14 +9,38 @@
 </head>
 <body>
   <div id="container"></div>
+  <div style="position:absolute;bottom:0;width:100%;background:#222;color:#eee;padding:4px;">
+    <input id="chat-input" style="width:80%" placeholder="Ask the assistant" />
+    <button id="chat-send">Send</button>
+    <pre id="chat-output" style="white-space:pre-wrap;"></pre>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
   <script>
+    const { runChat } = require('../chat');
     require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' } });
     require(['vs/editor/editor.main'], function() {
-      monaco.editor.create(document.getElementById('container'), {
+      const editor = monaco.editor.create(document.getElementById('container'), {
         value: '// Monaco Editor',
         language: 'typescript'
       });
+
+      document.getElementById('chat-send').onclick = async () => {
+        const input = document.getElementById('chat-input');
+        const output = document.getElementById('chat-output');
+        output.textContent = '';
+        const message = input.value.trim();
+        if (!message) return;
+        input.value = '';
+        try {
+          const messages = [{ role: 'user', content: message }];
+          await runChat(messages, token => {
+            output.textContent += token;
+          });
+        } catch (err) {
+          output.textContent = err.message;
+        }
+      };
     });
   </script>
 </body>

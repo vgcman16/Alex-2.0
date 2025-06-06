@@ -6,11 +6,12 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      contextIsolation: true
+      nodeIntegration: true,
+      contextIsolation: false
     }
   });
 
-  win.loadFile(join(__dirname, 'index.html'));
+  win.loadFile(join(__dirname, '../src/index.html'));
 }
 
 app.whenReady().then(createWindow);

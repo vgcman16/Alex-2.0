@@ -4,7 +4,10 @@
     "target": "es2017",
     "outDir": "dist",
     "strict": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": ["node", "electron"]
   },
   "include": ["src/**/*"]
 }
