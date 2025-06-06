@@ -34,3 +34,7 @@ const { streamChatCompletion } = require('./openrouter');
   }
 })();
 ```
+
+The wrapper validates that an `OPENROUTER_API_KEY` value is provided. If the `apiKey`
+option is empty, `streamChatCompletion` throws an error before making any
+requests.
