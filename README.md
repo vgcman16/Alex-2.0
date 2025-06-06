@@ -38,6 +38,13 @@ Use this list to verify that your environment is ready:
 - [ ] Desktop app started with `npm start` inside `app`
 - [ ] `OPENROUTER_API_KEY` exported if using AI service
 
+## Development Container
+
+The project includes a `.devcontainer` configuration for VS Code and GitHub Codespaces.
+Opening the repository in a container automatically installs dependencies using
+the `postCreateCommand` defined in `devcontainer.json`, providing a ready-to-use
+Node 18 environment with Git LFS installed.
+
 ## Running Tests
 
 This project uses [Mocha](https://mochajs.org/) for its test suite. Mocha is

@@ -16,7 +16,7 @@ This document outlines the proposed plan for developing the AI IDE.
    - Electron window with Monaco editor ✅
    - Basic in-editor chat using OpenRouter completions ✅
    - Inline autocomplete
-   - Dev container and CI pipeline
+   - Dev container and CI pipeline ✅
 2. **Beta (8 wks)**
    - Autonomous agent to run tasks and create PRs
    - Cost dashboard with OpenRouter headers

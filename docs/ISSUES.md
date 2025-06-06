@@ -12,7 +12,7 @@ This file lists proposed epics and issues for delivering the AI IDE.
 - **Issue: OpenRouter Autocomplete** ✅
   - Implement streamed completions using `streamChatCompletion`.
   - Acceptance: Pressing Ctrl+Space triggers completions from API.
-- **Issue: Dev Container & CI**
+- **Issue: Dev Container & CI** ✅
   - Provide Dockerfile and GitHub Actions workflow.
   - Acceptance: CI installs dependencies and runs tests.
 
