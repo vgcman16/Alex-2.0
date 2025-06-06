@@ -11,9 +11,9 @@ Alex 2.0 is a simple project used for demonstration purposes. This repository co
    git clone https://github.com/vgcman16/Alex-2.0.git
    cd Alex-2.0
    ```
-2. Install any dependencies (if required):
+2. Install the Node dependencies:
    ```bash
-   pip install -r requirements.txt
+   npm install
    ```
 
 3. To run the desktop application located in the `app` folder:
