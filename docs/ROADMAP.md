@@ -29,3 +29,9 @@ This document outlines the proposed plan for developing the AI IDE.
    - Voice coding
    - Multi-agent code review
    - UI tests
+5. **v2.0 (16 wks)**
+   - Cloud sync across devices
+   - Mobile companion app
+   - ChatOps CLI for automation
+   - Code search indexing
+   - GPU-accelerated local inference
