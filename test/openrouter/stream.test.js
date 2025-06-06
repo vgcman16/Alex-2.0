@@ -2,7 +2,13 @@ const { streamChatCompletion } = require('../../ai-service/openrouter');
 const { ReadableStream } = require('node:stream/web');
 const { expect } = require('chai');
 
+// Preserve the original fetch implementation so it can be restored after tests
+const originalFetch = global.fetch;
+
 describe('streamChatCompletion', () => {
+  afterEach(() => {
+    global.fetch = originalFetch;
+  });
   function streamFromChunks(chunks) {
     return new ReadableStream({
       start(controller) {
