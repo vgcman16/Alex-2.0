@@ -6,6 +6,9 @@ Alex 2.0 is a simple project used for demonstration purposes. This repository co
 
 ## Getting Started
 
+Make sure you have **Node.js v18 or higher** installed. The Node-based examples
+in this repository depend on features available in recent Node versions.
+
 1. Clone the repository and change into its directory:
    ```bash
    git clone https://github.com/vgcman16/Alex-2.0.git

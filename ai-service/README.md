@@ -2,6 +2,8 @@
 
 This folder holds service components that interface with AI models.
 
+These scripts require **Node.js v18 or higher** to run properly.
+
 ## OpenRouter Wrapper
 
 `openrouter.js` exposes a `streamChatCompletion` function that returns an async generator for streamed chat completions. It accepts an array of models and automatically falls back to the next model if the current one fails or does not respond within five seconds.
