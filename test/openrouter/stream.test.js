@@ -48,4 +48,21 @@ describe('streamChatCompletion', () => {
       { choices: [{ delta: { content: 'bar' } }] }
     ]);
   });
+
+  it('throws when apiKey is missing', async () => {
+    let error;
+    try {
+      for await (const _ of streamChatCompletion({
+        messages: [],
+        models: ['model-a'],
+        apiKey: undefined
+      })) {
+        // no-op
+      }
+    } catch (err) {
+      error = err;
+    }
+    expect(error).to.be.instanceOf(Error);
+    expect(error.message).to.equal('OPENROUTER_API_KEY is required');
+  });
 });
