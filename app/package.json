@@ -1,0 +1,14 @@
+{
+  "name": "alex-app",
+  "version": "1.0.0",
+  "description": "Electron app with Monaco editor",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && electron ."
+  },
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "typescript": "^5.2.0"
+  }
+}

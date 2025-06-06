@@ -12,6 +12,13 @@ Alex 2.0 is a simple project used for demonstration purposes. This repository co
    ```
 2. Change into the project directory and install any dependencies if required.
 
+3. To run the desktop application located in the `app` folder:
+   ```bash
+   cd app
+   npm install
+   npm start
+   ```
+
 ## Architecture
 
 The current structure is intentionally lightweight. It includes only a README file, but you can expand it with your own scripts or additional resources. Feel free to adapt the layout to suit your needs.
