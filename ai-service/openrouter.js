@@ -13,6 +13,9 @@ const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
  * @returns {AsyncGenerator<Object>} async generator yielding completion deltas
  */
 async function* streamChatCompletion({ messages, models, apiKey }) {
+  if (!apiKey) {
+    throw new Error('OPENROUTER_API_KEY is required');
+  }
   if (!Array.isArray(models) || models.length === 0) {
     throw new Error('models must be a non-empty array');
   }
