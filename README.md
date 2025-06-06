@@ -44,6 +44,27 @@ The test script spawns two Node processes that connect to the public signaling s
 
 Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.
 
+## Working with Binary Files
+
+Some assets may use [Git LFS](https://git-lfs.com/). If you contribute or modify binary files, install LFS locally:
+
+```bash
+git lfs install
+```
+
+You can obtain LFS content when cloning:
+
+```bash
+git lfs clone <repository-url>
+```
+
+Or clone normally and pull LFS objects afterwards:
+
+```bash
+git clone <repository-url>
+git lfs pull
+```
+
 
 ## License
 
