@@ -13,8 +13,8 @@ This document outlines the proposed plan for developing the AI IDE.
 
 ## Milestones
 1. **MVP (4 wks)**
-   - Electron window with Monaco editor
-   - Basic in-editor chat using OpenRouter completions
+   - Electron window with Monaco editor ✅
+   - Basic in-editor chat using OpenRouter completions ✅
    - Inline autocomplete
    - Dev container and CI pipeline
 2. **Beta (8 wks)**
