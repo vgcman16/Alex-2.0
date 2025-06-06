@@ -31,10 +31,10 @@ and the `ws` package provides a WebSocket polyfill (loaded in
 
 Use this list to verify that your environment is ready:
 
-- [ ] Node.js v18 or higher is installed
-- [ ] Repository cloned locally
-- [ ] `npm install` completed at the project root
-- [ ] Dependencies installed in `app` (`cd app && npm install`)
+- [x] Node.js v18 or higher is installed
+- [x] Repository cloned locally
+- [x] `npm install` completed at the project root
+- [x] Dependencies installed in `app` (`cd app && npm install`)
 - [ ] Desktop app started with `npm start` inside `app`
 - [ ] `OPENROUTER_API_KEY` exported if using AI service
 
