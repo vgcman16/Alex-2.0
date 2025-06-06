@@ -6,11 +6,15 @@ Alex 2.0 is a simple project used for demonstration purposes. This repository co
 
 ## Getting Started
 
-1. Clone the repository:
+1. Clone the repository and change into its directory:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/vgcman16/Alex-2.0.git
+   cd Alex-2.0
    ```
-2. Change into the project directory and install any dependencies if required.
+2. Install any dependencies (if required):
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Architecture
 
