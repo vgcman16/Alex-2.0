@@ -4,8 +4,11 @@
   "description": "Electron app with Monaco editor",
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r node_modules/monaco-editor/min dist/monaco",
     "start": "npm run build && electron ."
+  },
+  "dependencies": {
+    "monaco-editor": "^0.44.0"
   },
   "devDependencies": {
     "electron": "^28.2.0",
