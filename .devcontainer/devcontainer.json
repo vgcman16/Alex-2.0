@@ -1,0 +1,11 @@
+{
+  "name": "Alex 2.0",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "postCreateCommand": "npm install && cd app && npm install",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash"
+  }
+}
