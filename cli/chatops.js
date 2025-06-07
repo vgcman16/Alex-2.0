@@ -7,6 +7,10 @@ const {
 } = require('../ai-service/cloud-sync');
 const { startSyncWatcher } = require('../ai-service/sync-watcher');
 const { createIndex, search: searchIdx } = require('../search/indexer');
+const {
+  getEventCounts,
+  getTotalCost,
+} = require('../ai-service/telemetry-dashboard');
 
 async function main(
   argv = process.argv.slice(2),
@@ -18,6 +22,8 @@ async function main(
     watchFn = startSyncWatcher,
     indexFn = createIndex,
     searchFn = searchIdx,
+    eventCountsFn = getEventCounts,
+    costFn = getTotalCost,
   } = {}
 ) {
   const [cmd, ...args] = argv;
@@ -119,8 +125,17 @@ async function main(
       return 1;
     }
   }
+  if (cmd === 'telemetry') {
+    const counts = eventCountsFn();
+    const total = costFn();
+    for (const [type, count] of Object.entries(counts)) {
+      console.log(`${type}: ${count}`);
+    }
+    console.log(`Total cost: ${total}`);
+    return 0;
+  }
   console.error('Usage: chatops <command> [args...]');
-  console.error('Commands: plan, sync, upload, download, watch, search');
+  console.error('Commands: plan, sync, upload, download, watch, search, telemetry');
   return 1;
 }
 
