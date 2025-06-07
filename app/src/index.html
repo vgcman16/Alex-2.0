@@ -49,7 +49,9 @@
     <div id="main">
       <div id="patch-pane">
         <textarea id="patch-input" placeholder="Patch text"></textarea>
-        <button id="apply-patch">Apply Patch</button>
+        <button id="apply-patch">
+          <i data-feather="check-square"></i><span>Apply Patch</span>
+        </button>
       </div>
       <div id="editor-pane">
         <div id="container"></div>
@@ -67,9 +69,11 @@
         style="width: 70%"
         placeholder="Ask the assistant"
       />
-      <button id="chat-send">Send</button>
-      <button id="voice-btn">Voice</button>
-      <button id="theme-toggle">Light</button>
+      <button id="chat-send"><i data-feather="send"></i></button>
+      <button id="voice-btn">
+        <i data-feather="mic"></i><span>Voice</span>
+      </button>
+      <button id="theme-toggle"><i data-feather="sun"></i></button>
       <pre id="chat-output" style="white-space: pre-wrap"></pre>
     </div>
 

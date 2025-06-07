@@ -25,19 +25,21 @@ function setupUI(
     }
   }
   let voice;
-  doc.getElementById('voice-btn').onclick = () => {
+  const voiceBtn = doc.getElementById('voice-btn');
+  const voiceLabel = voiceBtn.querySelector('span') || voiceBtn;
+  voiceBtn.onclick = () => {
     if (!voice) {
       try {
         voice = voiceCtor(editor);
         voice.start();
-        doc.getElementById('voice-btn').textContent = 'Stop';
+        voiceLabel.textContent = 'Stop';
       } catch (err) {
         if (typeof alert !== 'undefined') alert(err.message);
       }
     } else {
       voice.stop();
       voice = null;
-      doc.getElementById('voice-btn').textContent = 'Voice';
+      voiceLabel.textContent = 'Voice';
     }
   };
 
@@ -95,6 +97,7 @@ function setupUI(
 
   const themeBtn = doc.getElementById('theme-toggle');
   if (themeBtn) {
+    const themeIcon = themeBtn.querySelector('i');
     const applyTheme = (theme) => {
       doc.body.classList.remove('light', 'dark');
       doc.body.classList.add(theme);
@@ -103,7 +106,17 @@ function setupUI(
           doc.defaultView.localStorage.setItem('theme', theme);
         }
       } catch {}
-      themeBtn.textContent = theme === 'dark' ? 'Light' : 'Dark';
+      if (themeIcon) {
+        themeIcon.setAttribute(
+          'data-feather',
+          theme === 'dark' ? 'sun' : 'moon'
+        );
+        try {
+          if (doc.defaultView && doc.defaultView.feather) {
+            doc.defaultView.feather.replace();
+          }
+        } catch {}
+      }
     };
     let theme = 'dark';
     try {
