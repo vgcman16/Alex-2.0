@@ -120,6 +120,22 @@ reviewers. Pass a diff to `review(diff)` and receive comments from each
 configured reviewer. The default reviewers include a senior developer and a
 security expert.
 
+## ChatOps CLI
+
+Automate common tasks using the `chatops` command line tool.
+
+Plan a goal:
+
+```bash
+node cli/chatops.js plan "add feature"
+```
+
+Synchronise the memory store with a remote URL:
+
+```bash
+node cli/chatops.js sync https://example.com/memory.json
+```
+
 ## Contributing
 
 Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.
