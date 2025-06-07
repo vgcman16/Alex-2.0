@@ -13,10 +13,8 @@ describe('runChat', () => {
   it('streams tokens from OpenRouter', async () => {
     process.env.OPENROUTER_API_KEY = 'test';
     const received = [];
-    await runChat([
-      { role: 'user', content: 'hi' }
-    ], (t) => received.push(t), {
-      streamChatCompletion: () => mockStream(['a', 'b'])
+    await runChat([{ role: 'user', content: 'hi' }], (t) => received.push(t), {
+      streamChatCompletion: () => mockStream(['a', 'b']),
     });
     expect(received.join('')).to.equal('ab');
   });
@@ -27,7 +25,9 @@ describe('runChat', () => {
     delete process.env.LLAMA_MODEL;
     let err;
     try {
-      await runChat([], () => {}, { streamChatCompletion: () => mockStream([]) });
+      await runChat([], () => {}, {
+        streamChatCompletion: () => mockStream([]),
+      });
     } catch (e) {
       err = e;
     }
@@ -40,10 +40,8 @@ describe('runChat', () => {
     process.env.LLAMA_PATH = '/bin/llama';
     process.env.LLAMA_MODEL = 'model.gguf';
     const received = [];
-    await runChat([
-      { role: 'user', content: 'hi' }
-    ], (t) => received.push(t), {
-      runLlama: async () => 'local'
+    await runChat([{ role: 'user', content: 'hi' }], (t) => received.push(t), {
+      runLlama: async () => 'local',
     });
     expect(received.join('')).to.equal('local');
   });

@@ -15,7 +15,20 @@ describe('createPullRequest', () => {
     expect(calls).to.deep.equal([
       ['git', ['rev-parse', '--abbrev-ref', 'HEAD'], 'repo'],
       ['git', ['push', '--set-upstream', 'origin', 'feature/test'], 'repo'],
-      ['gh', ['pr', 'create', '--title', 'title', '--body', 'desc', '--base', 'main'], 'repo']
+      [
+        'gh',
+        [
+          'pr',
+          'create',
+          '--title',
+          'title',
+          '--body',
+          'desc',
+          '--base',
+          'main',
+        ],
+        'repo',
+      ],
     ]);
   });
 

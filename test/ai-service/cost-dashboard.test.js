@@ -1,5 +1,10 @@
 const { expect } = require('chai');
-const { recordUsage, getTotalCost, getHistory, reset } = require('../../ai-service/cost-dashboard');
+const {
+  recordUsage,
+  getTotalCost,
+  getHistory,
+  reset,
+} = require('../../ai-service/cost-dashboard');
 
 describe('cost dashboard', () => {
   afterEach(() => reset());

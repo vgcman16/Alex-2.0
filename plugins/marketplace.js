@@ -13,20 +13,23 @@ function list(file) {
 function defaultDownload(url) {
   return new Promise((resolve, reject) => {
     https
-      .get(url, res => {
+      .get(url, (res) => {
         if (res.statusCode !== 200) {
           reject(new Error(`HTTP ${res.statusCode}`));
           return;
         }
         let data = '';
-        res.on('data', chunk => (data += chunk));
+        res.on('data', (chunk) => (data += chunk));
         res.on('end', () => resolve(data));
       })
       .on('error', reject);
   });
 }
 
-async function install(name, { marketplaceFile, dir = __dirname, download = defaultDownload } = {}) {
+async function install(
+  name,
+  { marketplaceFile, dir = __dirname, download = defaultDownload } = {}
+) {
   const registry = loadRegistry(marketplaceFile);
   const url = registry[name];
   if (!url) throw new Error(`Unknown plugin: ${name}`);

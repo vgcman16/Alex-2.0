@@ -16,7 +16,7 @@ describe('streamChatCompletion', () => {
           controller.enqueue(new TextEncoder().encode(chunk));
         }
         controller.close();
-      }
+      },
     });
   }
 
@@ -27,7 +27,7 @@ describe('streamChatCompletion', () => {
       'data: {"choices":[{"delta":{"content":"foo"}}]}\n\n',
       'data: {"choices":[{"delta":{"content":"bar"}}]}\n\n',
       'data: {"usage":{"cost":42}}\n\n',
-      'data: [DONE]\n\n'
+      'data: [DONE]\n\n',
     ];
 
     global.fetch = async (url, opts) => {
@@ -44,7 +44,7 @@ describe('streamChatCompletion', () => {
     for await (const delta of streamChatCompletion({
       messages,
       models: ['model-a', 'model-b'],
-      apiKey: 'test-key'
+      apiKey: 'test-key',
     })) {
       deltas.push(delta);
     }
@@ -53,17 +53,18 @@ describe('streamChatCompletion', () => {
     expect(deltas).to.deep.equal([
       { choices: [{ delta: { content: 'foo' } }] },
       { choices: [{ delta: { content: 'bar' } }] },
-      { usage: { cost: 42 } }
+      { usage: { cost: 42 } },
     ]);
   });
 
   it('throws when apiKey is missing', async () => {
     let error;
     try {
+      // eslint-disable-next-line no-unused-vars
       for await (const _ of streamChatCompletion({
         messages: [],
         models: ['model-a'],
-        apiKey: undefined
+        apiKey: undefined,
       })) {
         // no-op
       }

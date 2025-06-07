@@ -1,7 +1,14 @@
 const { runChat } = require('./chat');
 const { createVoiceCoder } = require('./voice');
 
-function setupUI(doc, editor, { runChat: chatImpl = runChat, createVoiceCoder: voiceCtor = createVoiceCoder } = {}) {
+function setupUI(
+  doc,
+  editor,
+  {
+    runChat: chatImpl = runChat,
+    createVoiceCoder: voiceCtor = createVoiceCoder,
+  } = {}
+) {
   let voice;
   doc.getElementById('voice-btn').onclick = () => {
     if (!voice) {
@@ -28,7 +35,9 @@ function setupUI(doc, editor, { runChat: chatImpl = runChat, createVoiceCoder: v
     input.value = '';
     try {
       const messages = [{ role: 'user', content: message }];
-      await chatImpl(messages, token => { output.textContent += token; });
+      await chatImpl(messages, (token) => {
+        output.textContent += token;
+      });
     } catch (err) {
       output.textContent = err.message;
     }

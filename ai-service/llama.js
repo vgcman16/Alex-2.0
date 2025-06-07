@@ -4,10 +4,14 @@ function runCommand(cmd, args) {
   return new Promise((resolve, reject) => {
     const child = spawn(cmd, args);
     let out = '';
-    child.stdout.on('data', d => { out += d.toString(); });
-    child.stderr.on('data', d => { out += d.toString(); });
+    child.stdout.on('data', (d) => {
+      out += d.toString();
+    });
+    child.stderr.on('data', (d) => {
+      out += d.toString();
+    });
     child.on('error', reject);
-    child.on('close', code => {
+    child.on('close', (code) => {
       if (code === 0) resolve(out.trim());
       else reject(new Error(`llama exited with code ${code}`));
     });
