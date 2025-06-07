@@ -23,7 +23,7 @@ This file lists proposed epics and issues for delivering the AI IDE.
  - **Issue: File Editor** ✅
   - Agent can modify multiple files and create branch.
   - Acceptance: Changes committed on feature branch.
-- **Issue: Test Runner Loop**
+- **Issue: Test Runner Loop** ✅
   - Run `npm test` and retry on failure.
   - Acceptance: Tests pass before PR is created.
 
