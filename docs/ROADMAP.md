@@ -53,7 +53,7 @@ This document outlines the proposed plan for developing the AI IDE.
 - Model flexibility via status bar switcher ✅
 - Windows installer auto-update and winget manifest ✅
 - Telemetry dashboard and cost tracking ✅
-- Sample extension and model plugin
+- Sample extension and model plugin ✅
 - Architecture diagram and contribution guide
 - Demo GIFs and screenshots of core flows
 - Continued polish of the mobile UI
