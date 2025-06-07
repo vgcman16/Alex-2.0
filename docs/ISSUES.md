@@ -20,7 +20,7 @@ This file lists proposed epics and issues for delivering the AI IDE.
 - **Issue: Task Planner** ✅
   - Accept user goal and produce step-by-step plan.
   - Acceptance: Plan printed to log.
-- **Issue: File Editor**
+ - **Issue: File Editor** ✅
   - Agent can modify multiple files and create branch.
   - Acceptance: Changes committed on feature branch.
 - **Issue: Test Runner Loop**
