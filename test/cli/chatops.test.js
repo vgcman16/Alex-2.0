@@ -22,6 +22,38 @@ describe('chatops CLI', () => {
       syncFn: async (url, file) => {
         args = `${url}|${file}`;
       },
+      uploadFn: async () => {},
+      downloadFn: async () => {},
+      watchFn: async () => {},
+    });
+    expect(args).to.equal('https://ex|/tmp/mem.json');
+    expect(code).to.equal(0);
+  });
+
+  it('runs upload command', async () => {
+    let args;
+    const code = await main(['upload', 'https://ex', '/tmp/mem.json'], {
+      planFn: async () => {},
+      syncFn: async () => {},
+      uploadFn: async (url, file) => {
+        args = `${url}|${file}`;
+      },
+      downloadFn: async () => {},
+      watchFn: async () => {},
+    });
+    expect(args).to.equal('https://ex|/tmp/mem.json');
+    expect(code).to.equal(0);
+  });
+
+  it('runs download command', async () => {
+    let args;
+    const code = await main(['download', 'https://ex', '/tmp/mem.json'], {
+      planFn: async () => {},
+      syncFn: async () => {},
+      uploadFn: async () => {},
+      downloadFn: async (url, file) => {
+        args = `${url}|${file}`;
+      },
       watchFn: async () => {},
     });
     expect(args).to.equal('https://ex|/tmp/mem.json');
@@ -34,6 +66,8 @@ describe('chatops CLI', () => {
     const code = await main(['watch', 'https://ex', '/tmp/mem.json'], {
       planFn: async () => {},
       syncFn: async () => {},
+      uploadFn: async () => {},
+      downloadFn: async () => {},
       watchFn: (url, opts) => {
         args = `${url}|${opts.file}`;
         called = true;
@@ -51,6 +85,8 @@ describe('chatops CLI', () => {
     const code = await main(['search', 'foo', '/tmp'], {
       planFn: async () => {},
       syncFn: async () => {},
+      uploadFn: async () => {},
+      downloadFn: async () => {},
       watchFn: async () => {},
       indexFn: (dir) => {
         dirArg = dir;
@@ -70,6 +106,8 @@ describe('chatops CLI', () => {
     const code = await main(['unknown'], {
       planFn: async () => {},
       syncFn: async () => {},
+      uploadFn: async () => {},
+      downloadFn: async () => {},
       watchFn: async () => {},
     });
     expect(code).to.equal(1);

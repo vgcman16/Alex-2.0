@@ -137,6 +137,18 @@ Synchronise the memory store with a remote URL:
 node cli/chatops.js sync https://example.com/memory.json path/to/memory.json
 ```
 
+Upload the local memory file without merging:
+
+```bash
+node cli/chatops.js upload https://example.com/memory.json path/to/memory.json
+```
+
+Download the remote memory file:
+
+```bash
+node cli/chatops.js download https://example.com/memory.json path/to/memory.json
+```
+
 Start a background watcher to periodically sync:
 
 ```bash
