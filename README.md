@@ -158,6 +158,10 @@ const watcher = startSyncWatcher('https://example.com/memory.json', {
 // Call watcher.stop() to disable syncing
 ```
 
+Set `MEMORY_FILE` to the path of a local JSON file and `MEMORY_SYNC_URL` to a
+remote `/memory` endpoint to have the desktop app automatically store and sync
+chat history after each message.
+
 ## Contributing
 
 Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.

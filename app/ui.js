@@ -1,11 +1,12 @@
 const { runChat } = require('./chat');
+const { runChatWithMemory } = require('./chat-memory');
 const { createVoiceCoder } = require('./voice');
 
 function setupUI(
   doc,
   editor,
   {
-    runChat: chatImpl = runChat,
+    runChat: chatImpl = runChatWithMemory,
     createVoiceCoder: voiceCtor = createVoiceCoder,
   } = {}
 ) {
