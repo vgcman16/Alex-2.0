@@ -15,11 +15,11 @@ This document outlines the proposed plan for developing the AI IDE.
 1. **MVP (4 wks)**
    - Electron window with Monaco editor ✅
    - Basic in-editor chat using OpenRouter completions ✅
-   - Inline autocomplete
+   - Inline autocomplete ✅
    - Dev container and CI pipeline ✅
 2. **Beta (8 wks)**
    - Autonomous agent to run tasks and create PRs
-   - Cost dashboard with OpenRouter headers
+   - Cost dashboard with OpenRouter headers ✅
    - Real-time collaboration via Yjs
 3. **v1.0 (12 wks)**
    - Local model runner integration

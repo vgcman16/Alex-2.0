@@ -26,6 +26,7 @@ describe('streamChatCompletion', () => {
     const chunks = [
       'data: {"choices":[{"delta":{"content":"foo"}}]}\n\n',
       'data: {"choices":[{"delta":{"content":"bar"}}]}\n\n',
+      'data: {"usage":{"cost":42}}\n\n',
       'data: [DONE]\n\n'
     ];
 
@@ -51,7 +52,8 @@ describe('streamChatCompletion', () => {
     expect(call).to.equal(2);
     expect(deltas).to.deep.equal([
       { choices: [{ delta: { content: 'foo' } }] },
-      { choices: [{ delta: { content: 'bar' } }] }
+      { choices: [{ delta: { content: 'bar' } }] },
+      { usage: { cost: 42 } }
     ]);
   });
 

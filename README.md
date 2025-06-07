@@ -91,6 +91,12 @@ export LLAMA_MODEL=/path/to/model.gguf
 
 The `runLlama` helper in `ai-service/llama.js` executes the binary and returns the generated text.
 
+## Cost Dashboard
+
+Each OpenRouter request can include `usage` tracking to report token counts and cost.
+The `cost-dashboard` module aggregates these usage objects and exposes the total
+credits consumed during a session.
+
 ## Contributing
 
 Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.
