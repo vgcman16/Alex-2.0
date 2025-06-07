@@ -2,6 +2,7 @@ const { runChatWithMemory } = require('./chat-memory');
 const { createVoiceCoder } = require('./voice');
 const { startSyncWatcher } = require('../ai-service/sync-watcher');
 const { previewPatch, applyPatch } = require('./patcher');
+const { setModel, getModel } = require('./model');
 
 function setupUI(
   doc,
@@ -13,6 +14,8 @@ function setupUI(
     previewPatch: preview = previewPatch,
     applyPatch: applyFn = applyPatch,
     monaco: monacoLib,
+    setModel: setModelFn = setModel,
+    getModel: getModelFn = getModel,
   } = {}
 ) {
   let watcher;
@@ -93,6 +96,27 @@ function setupUI(
         if (typeof alert !== 'undefined') alert(err.message);
       }
     };
+  }
+
+  const modelSelect = doc.getElementById('model-switcher');
+  if (modelSelect) {
+    const applyModel = (model) => {
+      setModelFn(model);
+      try {
+        if (doc.defaultView && doc.defaultView.localStorage) {
+          doc.defaultView.localStorage.setItem('model', model);
+        }
+      } catch {}
+    };
+    let model = getModelFn();
+    try {
+      if (doc.defaultView && doc.defaultView.localStorage) {
+        model = doc.defaultView.localStorage.getItem('model') || model;
+      }
+    } catch {}
+    modelSelect.value = model;
+    applyModel(model);
+    modelSelect.onchange = () => applyModel(modelSelect.value);
   }
 
   const themeBtn = doc.getElementById('theme-toggle');

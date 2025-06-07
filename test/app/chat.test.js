@@ -1,5 +1,6 @@
 const { expect } = require('chai');
 const { runChat } = require('../../app/chat');
+const { setModel } = require('../../app/model');
 
 function mockStream(chunks) {
   return (async function* () {
@@ -44,5 +45,18 @@ describe('runChat', () => {
       runLlama: async () => 'local',
     });
     expect(received.join('')).to.equal('local');
+  });
+
+  it('uses selected model for OpenRouter', async () => {
+    process.env.OPENROUTER_API_KEY = 'test';
+    setModel('my-model');
+    let used;
+    await runChat([{ role: 'user', content: 'hi' }], () => {}, {
+      streamChatCompletion: ({ models }) => {
+        used = models[0];
+        return mockStream([]);
+      },
+    });
+    expect(used).to.equal('my-model');
   });
 });

@@ -1,5 +1,6 @@
 const { expect } = require('chai');
 const { fetchCompletion } = require('../../app/autocomplete');
+const { setModel } = require('../../app/model');
 
 function mockStream(chunks) {
   return (async function* () {
@@ -42,5 +43,18 @@ describe('fetchCompletion', () => {
       runLlama: async () => 'local',
     });
     expect(result).to.equal('local');
+  });
+
+  it('uses selected model for OpenRouter', async () => {
+    process.env.OPENROUTER_API_KEY = 'test';
+    setModel('x');
+    let used;
+    await fetchCompletion('foo', {
+      streamChatCompletion: ({ models }) => {
+        used = models[0];
+        return mockStream(['ok']);
+      },
+    });
+    expect(used).to.equal('x');
   });
 });
