@@ -102,6 +102,55 @@ describe('chatops CLI', () => {
     expect(code).to.equal(0);
   });
 
+  it('opens shell', async () => {
+    let called = false;
+    const code = await main(['shell'], {
+      shellFn: () => {
+        called = true;
+      },
+      planFn: async () => {},
+      syncFn: async () => {},
+      uploadFn: async () => {},
+      downloadFn: async () => {},
+      watchFn: async () => {},
+    });
+    expect(called).to.be.true;
+    expect(code).to.equal(0);
+  });
+
+  it('runs test command', async () => {
+    let retriesArg;
+    let called = false;
+    const code = await main(['test', '2'], {
+      testFn: ({ retries }) => {
+        retriesArg = retries;
+        called = true;
+      },
+      planFn: async () => {},
+      syncFn: async () => {},
+      uploadFn: async () => {},
+      downloadFn: async () => {},
+      watchFn: async () => {},
+    });
+    expect(called).to.be.true;
+    expect(retriesArg).to.equal(2);
+    expect(code).to.equal(0);
+  });
+
+  it('returns error when tests fail', async () => {
+    const code = await main(['test'], {
+      testFn: () => {
+        throw new Error('fail');
+      },
+      planFn: async () => {},
+      syncFn: async () => {},
+      uploadFn: async () => {},
+      downloadFn: async () => {},
+      watchFn: async () => {},
+    });
+    expect(code).to.equal(1);
+  });
+
   it('shows telemetry info', async () => {
     let printed = [];
     const oldLog = console.log;

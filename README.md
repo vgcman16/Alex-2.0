@@ -180,6 +180,18 @@ Search code for a word:
 node cli/chatops.js search TODO src
 ```
 
+Launch an interactive shell in the project directory:
+
+```bash
+node cli/chatops.js shell
+```
+
+Run the test suite with optional retries:
+
+```bash
+node cli/chatops.js test 2
+```
+
 View telemetry event counts and total cost:
 
 ```bash
