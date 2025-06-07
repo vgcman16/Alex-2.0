@@ -92,6 +92,14 @@ export LLAMA_MODEL=/path/to/model.gguf
 The `runLlama` helper in `ai-service/llama.js` executes the binary and returns the generated text.
 If `OPENROUTER_API_KEY` is unset and these variables are provided, the app automatically falls back to the local runner.
 
+## Voice Coding
+
+Alex 2.0 can capture speech and insert the transcribed text directly into the editor.
+The `createVoiceCoder` function in `app/voice.js` wraps the browser's
+`SpeechRecognition` API. Pass the active Monaco editor to
+`createVoiceCoder(editor)` and call `start()` to begin dictation. Call `stop()`
+to end the session. Spoken words appear at the current cursor position.
+
 ## Cost Dashboard
 
 Each OpenRouter request can include `usage` tracking to report token counts and cost.
