@@ -22,8 +22,26 @@ describe('chatops CLI', () => {
       syncFn: async (url) => {
         urlArg = url;
       },
+      watchFn: async () => {},
     });
     expect(urlArg).to.equal('https://ex');
+    expect(code).to.equal(0);
+  });
+
+  it('starts watch command', async () => {
+    let urlArg;
+    let called = false;
+    const code = await main(['watch', 'https://ex'], {
+      planFn: async () => {},
+      syncFn: async () => {},
+      watchFn: (url) => {
+        urlArg = url;
+        called = true;
+        return { stop() {} };
+      },
+    });
+    expect(urlArg).to.equal('https://ex');
+    expect(called).to.be.true;
     expect(code).to.equal(0);
   });
 
@@ -31,6 +49,7 @@ describe('chatops CLI', () => {
     const code = await main(['unknown'], {
       planFn: async () => {},
       syncFn: async () => {},
+      watchFn: async () => {},
     });
     expect(code).to.equal(1);
   });

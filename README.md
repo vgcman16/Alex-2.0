@@ -137,6 +137,12 @@ Synchronise the memory store with a remote URL:
 node cli/chatops.js sync https://example.com/memory.json
 ```
 
+Start a background watcher to periodically sync:
+
+```bash
+node cli/chatops.js watch https://example.com/memory.json
+```
+
 ## Cloud Sync Watcher
 
 Automatically keep your memory file in sync across devices. Use
