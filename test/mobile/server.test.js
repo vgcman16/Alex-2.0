@@ -63,4 +63,13 @@ describe('mobile server', () => {
     expect(res.status).to.equal(200);
     expect(res.text).to.include('<!doctype html>');
   });
+
+  it('clears memory via DELETE', async () => {
+    fs.writeFileSync(file, '[1]');
+    const app = createServer({ memoryFile: file, runChat: async () => {} });
+    const res = await request(app).delete('/memory');
+    expect(res.status).to.equal(200);
+    const data = fs.readFileSync(file, 'utf8');
+    expect(data).to.equal('[]');
+  });
 });

@@ -22,6 +22,11 @@ function createServer({ memoryFile = 'memory.json' } = {}) {
     res.json({ ok: true });
   });
 
+  app.delete('/memory', (req, res) => {
+    fs.writeFileSync(memoryFile, '[]');
+    res.json({ ok: true });
+  });
+
   return app;
 }
 

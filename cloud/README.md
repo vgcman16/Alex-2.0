@@ -6,6 +6,7 @@ It exposes a single `/memory` endpoint:
 
 - `GET /memory` returns the stored JSON array
 - `PUT /memory` replaces the stored data with the provided JSON array
+- `DELETE /memory` clears the stored data
 
 Start the server:
 
