@@ -97,6 +97,12 @@ Each OpenRouter request can include `usage` tracking to report token counts and 
 The `cost-dashboard` module aggregates these usage objects and exposes the total
 credits consumed during a session.
 
+## Persistent Memory Store
+
+Use `memory-store.js` to persist conversation history between sessions. The
+module provides `append(entry, file)` to record messages, `load(file)` to read
+them back, and `reset(file)` to clear the store.
+
 ## Contributing
 
 Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.
