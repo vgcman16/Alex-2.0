@@ -54,7 +54,7 @@ This document outlines the proposed plan for developing the AI IDE.
 - Windows installer auto-update and winget manifest ✅
 - Telemetry dashboard and cost tracking ✅
 - Sample extension and model plugin ✅
-- Architecture diagram and contribution guide ✅
+- Architecture diagram and contribution guide
 - Demo GIFs and screenshots of core flows
 - Continued polish of the mobile UI
 - Packaging and installers for each platform
