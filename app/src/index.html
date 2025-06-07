@@ -94,7 +94,7 @@
           document.getElementById('container')
         );
         enableInlineCompletion(editor);
-        setupUI(document, editor);
+        setupUI(document, editor, { monaco });
         try {
           if (window.feather) window.feather.replace();
         } catch {}

@@ -102,6 +102,11 @@ function setupUI(
       doc.body.classList.remove('light', 'dark');
       doc.body.classList.add(theme);
       try {
+        if (monacoLib && monacoLib.editor) {
+          monacoLib.editor.setTheme(theme === 'dark' ? 'vs-dark' : 'vs');
+        }
+      } catch {}
+      try {
         if (doc.defaultView && doc.defaultView.localStorage) {
           doc.defaultView.localStorage.setItem('theme', theme);
         }
