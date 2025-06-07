@@ -1,4 +1,3 @@
-const { runChat } = require('./chat');
 const { runChatWithMemory } = require('./chat-memory');
 const { createVoiceCoder } = require('./voice');
 
