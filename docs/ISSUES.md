@@ -40,3 +40,8 @@ This file lists proposed epics and issues for delivering the AI IDE.
   - Bundle GGUF weights and `llama.cpp` binaries.
   - Acceptance: Autocomplete works offline.
 
+## Epic: Data Persistence
+- **Issue: Persistent Memory Store** ✅
+  - Save conversation history to disk and reload it on startup.
+  - Acceptance: Messages appended to the store persist across sessions.
+

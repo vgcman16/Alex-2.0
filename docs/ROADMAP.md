@@ -24,7 +24,7 @@ This document outlines the proposed plan for developing the AI IDE.
 3. **v1.0 (12 wks)**
    - Local model runner integration
    - Extension marketplace and plugin API
-   - Persistent memory store
+   - Persistent memory store ✅
 4. **v1.1+**
    - Voice coding
    - Multi-agent code review
