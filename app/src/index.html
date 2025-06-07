@@ -5,20 +5,50 @@
     <title>Monaco Editor</title>
     <style>
       html,
-      body,
-      #container {
+      body {
         height: 100%;
         margin: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      #main {
+        flex: 1;
+        display: flex;
+      }
+      #patch-pane,
+      #editor-pane,
+      #diff-pane {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      #container,
+      #diff-editor {
+        flex: 1;
+      }
+      #patch-input {
+        flex: 1;
       }
     </style>
   </head>
   <body>
-    <div id="container"></div>
+    <div id="main">
+      <div id="patch-pane">
+        <textarea id="patch-input" placeholder="Patch text"></textarea>
+        <button id="apply-patch">Apply Patch</button>
+      </div>
+      <div id="editor-pane">
+        <div id="container"></div>
+      </div>
+      <div id="diff-pane">
+        <div id="diff-editor"></div>
+      </div>
+    </div>
     <div
+      id="chat-bar"
       style="
-        position: absolute;
-        bottom: 0;
-        width: 100%;
         background: #222;
         color: #eee;
         padding: 4px;

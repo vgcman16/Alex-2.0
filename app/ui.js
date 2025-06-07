@@ -1,6 +1,7 @@
 const { runChatWithMemory } = require('./chat-memory');
 const { createVoiceCoder } = require('./voice');
 const { startSyncWatcher } = require('../ai-service/sync-watcher');
+const { previewPatch, applyPatch } = require('./patcher');
 
 function setupUI(
   doc,
@@ -9,6 +10,9 @@ function setupUI(
     runChat: chatImpl = runChatWithMemory,
     createVoiceCoder: voiceCtor = createVoiceCoder,
     startSyncWatcher: watcherCtor = startSyncWatcher,
+    previewPatch: preview = previewPatch,
+    applyPatch: applyFn = applyPatch,
+    monaco: monacoLib,
   } = {}
 ) {
   let watcher;
@@ -53,6 +57,39 @@ function setupUI(
       output.textContent = err.message;
     }
   };
+
+  const patchInput = doc.getElementById('patch-input');
+  const applyBtn = doc.getElementById('apply-patch');
+  const diffEl = doc.getElementById('diff-editor');
+  let diffEditor;
+  if (patchInput && applyBtn && diffEl) {
+    const updateDiff = () => {
+      try {
+        const { original, patched } = (preview || previewPatch)(patchInput.value);
+        const mon = monacoLib || require('monaco-editor');
+        if (!diffEditor) {
+          diffEditor = mon.editor.createDiffEditor(diffEl, { readOnly: true });
+        }
+        const o = mon.editor.createModel(original, 'javascript');
+        const m = mon.editor.createModel(patched, 'javascript');
+        diffEditor.setModel({ original: o, modified: m });
+      } catch (err) {
+        if (diffEditor) diffEditor.dispose();
+        diffEditor = null;
+        diffEl.textContent = err.message;
+      }
+    };
+    patchInput.addEventListener('input', updateDiff);
+    applyBtn.onclick = () => {
+      try {
+        (applyFn || applyPatch)(patchInput.value);
+        updateDiff();
+        if (typeof alert !== 'undefined') alert('Patch applied');
+      } catch (err) {
+        if (typeof alert !== 'undefined') alert(err.message);
+      }
+    };
+  }
 }
 
 module.exports = { setupUI };
