@@ -4,6 +4,16 @@
     <meta charset="utf-8" />
     <title>Monaco Editor</title>
     <style>
+      :root {
+        --bg-color: #121212;
+        --text-color: #eee;
+        --bar-bg: #222;
+      }
+      body.light {
+        --bg-color: #fff;
+        --text-color: #000;
+        --bar-bg: #eee;
+      }
       html,
       body {
         height: 100%;
@@ -12,6 +22,8 @@
       body {
         display: flex;
         flex-direction: column;
+        background: var(--bg-color);
+        color: var(--text-color);
       }
       #main {
         flex: 1;
@@ -48,11 +60,7 @@
     </div>
     <div
       id="chat-bar"
-      style="
-        background: #222;
-        color: #eee;
-        padding: 4px;
-      "
+      style="background: var(--bar-bg); color: var(--text-color); padding: 4px"
     >
       <input
         id="chat-input"
@@ -61,8 +69,11 @@
       />
       <button id="chat-send">Send</button>
       <button id="voice-btn">Voice</button>
+      <button id="theme-toggle">Light</button>
       <pre id="chat-output" style="white-space: pre-wrap"></pre>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
     <script>
@@ -80,6 +91,9 @@
         );
         enableInlineCompletion(editor);
         setupUI(document, editor);
+        try {
+          if (window.feather) window.feather.replace();
+        } catch {}
       });
     </script>
   </body>

@@ -65,7 +65,9 @@ function setupUI(
   if (patchInput && applyBtn && diffEl) {
     const updateDiff = () => {
       try {
-        const { original, patched } = (preview || previewPatch)(patchInput.value);
+        const { original, patched } = (preview || previewPatch)(
+          patchInput.value
+        );
         const mon = monacoLib || require('monaco-editor');
         if (!diffEditor) {
           diffEditor = mon.editor.createDiffEditor(diffEl, { readOnly: true });
@@ -88,6 +90,31 @@ function setupUI(
       } catch (err) {
         if (typeof alert !== 'undefined') alert(err.message);
       }
+    };
+  }
+
+  const themeBtn = doc.getElementById('theme-toggle');
+  if (themeBtn) {
+    const applyTheme = (theme) => {
+      doc.body.classList.remove('light', 'dark');
+      doc.body.classList.add(theme);
+      try {
+        if (doc.defaultView && doc.defaultView.localStorage) {
+          doc.defaultView.localStorage.setItem('theme', theme);
+        }
+      } catch {}
+      themeBtn.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    };
+    let theme = 'dark';
+    try {
+      if (doc.defaultView && doc.defaultView.localStorage) {
+        theme = doc.defaultView.localStorage.getItem('theme') || 'dark';
+      }
+    } catch {}
+    applyTheme(theme);
+    themeBtn.onclick = () => {
+      const next = doc.body.classList.contains('dark') ? 'light' : 'dark';
+      applyTheme(next);
     };
   }
 }
