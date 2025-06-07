@@ -30,6 +30,7 @@ async function install(
   name,
   { marketplaceFile, dir = __dirname, download = defaultDownload } = {}
 ) {
+  if (/[\\/]/.test(name)) throw new Error('Invalid plugin name');
   const registry = loadRegistry(marketplaceFile);
   const url = registry[name];
   if (!url) throw new Error(`Unknown plugin: ${name}`);

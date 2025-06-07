@@ -18,4 +18,13 @@ describe('patcher', () => {
     const updated = fs.readFileSync(file, 'utf8');
     expect(updated).to.equal('hi\n');
   });
+
+  it('creates parent directory when applying patch', () => {
+    const dir = fs.mkdtempSync(join(os.tmpdir(), 'patch-'));
+    const subFile = join(dir, 'sub', 'b.txt');
+    const patch = diff.createTwoFilesPatch('sub/b.txt', 'sub/b.txt', '', 'hi\n');
+    applyPatch(patch, dir);
+    const updated = fs.readFileSync(subFile, 'utf8');
+    expect(updated).to.equal('hi\n');
+  });
 });

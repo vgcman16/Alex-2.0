@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { join } = require('path');
+const { join, dirname } = require('path');
 const diff = require('diff');
 
 function fileFromPatch(p) {
@@ -21,7 +21,7 @@ function previewPatch(patchText, repo = '.') {
 
 function applyPatch(patchText, repo = '.') {
   const { file, patched } = previewPatch(patchText, repo);
-  fs.mkdirSync(join(file, '..'), { recursive: true });
+  fs.mkdirSync(dirname(file), { recursive: true });
   fs.writeFileSync(file, patched, 'utf8');
 }
 
