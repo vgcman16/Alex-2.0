@@ -35,5 +35,5 @@ This document outlines the proposed plan for developing the AI IDE.
    - Cloud sync across devices
    - Mobile companion app
    - ChatOps CLI for automation _(started)_
-   - Code search indexing
+   - Code search indexing _(started)_
    - GPU-accelerated local inference
