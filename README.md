@@ -119,6 +119,14 @@ Each OpenRouter request can include `usage` tracking to report token counts and 
 The `cost-dashboard` module aggregates these usage objects and exposes the total
 credits consumed during a session.
 
+## Telemetry Dashboard
+
+Use `telemetry-dashboard.js` to log events across the app. Call
+`recordEvent(type, data)` to store an event with a timestamp. When the `type` is
+`"usage"`, the event is also recorded by the cost dashboard so total spending is
+tracked automatically. Retrieve the list with `getEvents()` or aggregate counts
+with `getEventCounts()`.
+
 ## Persistent Memory Store
 
 Use `memory-store.js` to persist conversation history between sessions. The
