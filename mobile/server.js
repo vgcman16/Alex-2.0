@@ -2,12 +2,16 @@ const express = require('express');
 const { load, append } = require('../ai-service/memory-store');
 const { runChat } = require('../app/chat');
 
+const { join } = require('path');
+
 function createServer({
   runChat: chatImpl = runChat,
   memoryFile = 'memory.json',
+  staticDir = join(__dirname, 'public'),
 } = {}) {
   const app = express();
   app.use(express.json());
+  app.use(express.static(staticDir));
 
   app.get('/memory', (req, res) => {
     res.json(load(memoryFile));
