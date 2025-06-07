@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "monaco-editor": "^0.44.0",
-    "node-pre-gyp": "^0.17.0",
+    "node-pre-gyp": "npm:@mapbox/node-pre-gyp@^2.0.0",
     "express": "^4.21.2",
     "wrtc": "^0.4.7",
     "ws": "^8.18.2",

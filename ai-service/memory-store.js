@@ -1,4 +1,5 @@
-const { readFileSync, writeFileSync, existsSync } = require('fs');
+const { readFileSync, writeFileSync, existsSync, mkdirSync } = require('fs');
+const { dirname } = require('path');
 
 /**
  * Load persisted memory from a JSON file.
@@ -20,6 +21,7 @@ function load(file = 'memory.json') {
  * @param {string} [file='memory.json'] Path to the JSON file.
  */
 function append(entry, file = 'memory.json') {
+  mkdirSync(dirname(file), { recursive: true });
   const data = load(file);
   data.push(entry);
   writeFileSync(file, JSON.stringify(data, null, 2));
@@ -30,6 +32,7 @@ function append(entry, file = 'memory.json') {
  * @param {string} [file='memory.json'] Path to the JSON file.
  */
 function reset(file = 'memory.json') {
+  mkdirSync(dirname(file), { recursive: true });
   writeFileSync(file, '[]');
 }
 

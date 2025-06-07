@@ -25,4 +25,12 @@ describe('memory store', () => {
     reset(file);
     expect(load(file)).to.deep.equal([]);
   });
+
+  it('works with nested directory path', () => {
+    const nested = join(fs.mkdtempSync(join(os.tmpdir(), 'mem-')), 'nested', 'dir', 'mem.json');
+    append({ msg: 'x' }, nested);
+    expect(load(nested)).to.deep.equal([{ msg: 'x' }]);
+    reset(nested);
+    expect(load(nested)).to.deep.equal([]);
+  });
 });
