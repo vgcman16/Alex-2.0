@@ -29,5 +29,8 @@
     "jsdom": "^26.1.0",
     "mocha": "^10.4.0",
     "prettier": "^3.5.3"
+  },
+  "bin": {
+    "chatops": "./cli/chatops.js"
   }
 }
