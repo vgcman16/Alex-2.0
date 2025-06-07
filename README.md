@@ -143,6 +143,12 @@ Start a background watcher to periodically sync:
 node cli/chatops.js watch https://example.com/memory.json
 ```
 
+Search code for a word:
+
+```bash
+node cli/chatops.js search TODO src
+```
+
 ## Cloud Sync Watcher
 
 Automatically keep your memory file in sync across devices. Use

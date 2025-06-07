@@ -45,6 +45,27 @@ describe('chatops CLI', () => {
     expect(code).to.equal(0);
   });
 
+  it('runs search command', async () => {
+    let dirArg;
+    let termArg;
+    const code = await main(['search', 'foo', '/tmp'], {
+      planFn: async () => {},
+      syncFn: async () => {},
+      watchFn: async () => {},
+      indexFn: (dir) => {
+        dirArg = dir;
+        return { dir };
+      },
+      searchFn: (idx, term) => {
+        termArg = term;
+        return [{ file: 'a.js', line: 1, text: 'foo' }];
+      },
+    });
+    expect(dirArg).to.equal('/tmp');
+    expect(termArg).to.equal('foo');
+    expect(code).to.equal(0);
+  });
+
   it('returns error on unknown command', async () => {
     const code = await main(['unknown'], {
       planFn: async () => {},
