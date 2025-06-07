@@ -36,4 +36,4 @@ This document outlines the proposed plan for developing the AI IDE.
    - Mobile companion app
    - ChatOps CLI for automation _(started)_
    - Code search indexing _(started)_
-   - GPU-accelerated local inference
+   - GPU-accelerated local inference _(started)_

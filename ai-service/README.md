@@ -41,3 +41,10 @@ const { streamChatCompletion } = require('./openrouter');
 The wrapper validates that an `OPENROUTER_API_KEY` value is provided. If the `apiKey`
 option is empty, `streamChatCompletion` throws an error before making any
 requests.
+
+## Local Runner
+
+`llama.js` includes a `runLlama` helper that executes a local `llama.cpp` binary.
+Set `LLAMA_PATH` to the executable and `LLAMA_MODEL` to your GGUF weights. If
+`LLAMA_GPU_LAYERS` is defined, the helper passes `--n-gpu-layers` to offload that
+many layers to the GPU.

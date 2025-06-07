@@ -32,9 +32,15 @@ async function runLlama(prompt, options = {}) {
   const exe = options.executable || process.env.LLAMA_PATH;
   const model = options.model || process.env.LLAMA_MODEL;
   const runner = options.runCmd || runCommand;
+  const gpuLayers =
+    options.gpuLayers || process.env.LLAMA_GPU_LAYERS || null;
   if (!exe) throw new Error('LLAMA_PATH is not set');
   if (!model) throw new Error('LLAMA_MODEL is not set');
-  return runner(exe, ['-m', model, '-p', prompt, '--silent-prompt']);
+  const args = ['-m', model, '-p', prompt, '--silent-prompt'];
+  if (gpuLayers) {
+    args.push('--n-gpu-layers', String(gpuLayers));
+  }
+  return runner(exe, args);
 }
 
 module.exports = { runLlama };

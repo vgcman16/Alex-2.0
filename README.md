@@ -88,6 +88,7 @@ Alex 2.0 can also generate completions offline using [`llama.cpp`](https://githu
 ```bash
 export LLAMA_PATH=/path/to/main
 export LLAMA_MODEL=/path/to/model.gguf
+export LLAMA_GPU_LAYERS=35 # optional
 ```
 
 The `runLlama` helper in `ai-service/llama.js` executes the binary and returns the generated text.
