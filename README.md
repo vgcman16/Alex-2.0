@@ -90,6 +90,7 @@ export LLAMA_MODEL=/path/to/model.gguf
 ```
 
 The `runLlama` helper in `ai-service/llama.js` executes the binary and returns the generated text.
+If `OPENROUTER_API_KEY` is unset and these variables are provided, the app automatically falls back to the local runner.
 
 ## Cost Dashboard
 
