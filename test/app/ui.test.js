@@ -4,7 +4,7 @@ const { setupUI } = require('../../app/ui');
 
 describe('UI integration', () => {
   function createDom() {
-    const html = `<!DOCTYPE html><div id="container"></div><input id="chat-input"><button id="chat-send">Send</button><button id="voice-btn">Voice</button><button id="theme-toggle">Light</button><pre id="chat-output"></pre>`;
+    const html = `<!DOCTYPE html><div id="container"></div><input id="chat-input"><button id="chat-send">Send</button><button id="voice-btn">Voice</button><select id="model-switcher"><option value="a">a</option><option value="b">b</option></select><button id="theme-toggle">Light</button><pre id="chat-output"></pre>`;
     const dom = new JSDOM(html, { url: 'http://localhost' });
     return dom.window.document;
   }
@@ -104,5 +104,26 @@ describe('UI integration', () => {
     expect(doc.body.classList.contains('light')).to.be.true;
     btn.onclick();
     expect(doc.body.classList.contains('dark')).to.be.true;
+  });
+
+  it('changes model on selection', () => {
+    const doc = createDom();
+    let selected;
+    setupUI(
+      doc,
+      {},
+      {
+        runChat: async () => {},
+        createVoiceCoder: () => ({ start() {}, stop() {} }),
+        setModel: (m) => {
+          selected = m;
+        },
+        getModel: () => 'a',
+      }
+    );
+    const sel = doc.getElementById('model-switcher');
+    sel.value = 'b';
+    sel.onchange();
+    expect(selected).to.equal('b');
   });
 });

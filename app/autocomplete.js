@@ -1,5 +1,6 @@
 const { streamChatCompletion } = require('../ai-service/openrouter');
 const { runLlama } = require('../ai-service/llama');
+const { getModel } = require('./model');
 
 async function fetchCompletion(
   prefix,
@@ -14,7 +15,7 @@ async function fetchCompletion(
     let result = '';
     for await (const chunk of stream({
       messages,
-      models: ['openrouter/openai/gpt-3.5-turbo'],
+      models: [getModel()],
       apiKey,
     })) {
       const content = chunk.choices?.[0]?.delta?.content;
