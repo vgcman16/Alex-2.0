@@ -2,10 +2,6 @@
 
 The project uses an Electron shell with a web-based renderer. The renderer hosts the Monaco editor and communicates with the Node.js main process via IPC. OpenRouter or a local `llama.cpp` binary provides completions. Chat history is stored on disk and can be synced to a remote service.
 
-Below is a generated diagram of the major components. The original Mermaid source is available in `architecture.mmd` so you can regenerate the image with `mmdc`. A Puppeteer configuration is provided in `puppeteer.json` to allow running the CLI in a container.
-
-![Architecture Diagram](architecture.png)
-
 ```mermaid
 graph TD
     subgraph Renderer
