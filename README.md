@@ -62,7 +62,7 @@ You can also run the commands individually if preferred.
 
 ## Architecture
 
-The current structure is intentionally lightweight. It includes only a README file, but you can expand it with your own scripts or additional resources. Feel free to adapt the layout to suit your needs.
+The codebase is intentionally lightweight. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for a high-level diagram of how the pieces interact. You can extend the structure with your own scripts or additional resources.
 
 ## Real-time Editing Demo
 
@@ -194,7 +194,7 @@ chat history after each message.
 
 ## Contributing
 
-Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.
+Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes. For more details, see [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
 ## Working with Binary Files
 
