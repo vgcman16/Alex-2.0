@@ -94,6 +94,17 @@ export LLAMA_GPU_LAYERS=35 # optional
 The `runLlama` helper in `ai-service/llama.js` executes the binary and returns the generated text.
 If `OPENROUTER_API_KEY` is unset and these variables are provided, the app automatically falls back to the local runner.
 
+## Model Switcher
+
+The desktop app shows a model selector in the status bar. By default the dropdown
+contains `gpt-3.5` and `gpt-4`. Set the `MODEL_OPTIONS` environment variable to a
+comma-separated list of identifiers to customise the available options. The first
+model becomes the default.
+
+```bash
+export MODEL_OPTIONS="openrouter/openai/gpt-3.5-turbo,openrouter/openai/gpt-4,openrouter/mistralai/mistral-7b"
+```
+
 ## Voice Coding
 
 Alex 2.0 can capture speech and insert the transcribed text directly into the editor.

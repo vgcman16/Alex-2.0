@@ -2,7 +2,7 @@ const { runChatWithMemory } = require('./chat-memory');
 const { createVoiceCoder } = require('./voice');
 const { startSyncWatcher } = require('../ai-service/sync-watcher');
 const { previewPatch, applyPatch } = require('./patcher');
-const { setModel, getModel } = require('./model');
+const { setModel, getModel, getModelOptions } = require('./model');
 
 function setupUI(
   doc,
@@ -16,6 +16,7 @@ function setupUI(
     monaco: monacoLib,
     setModel: setModelFn = setModel,
     getModel: getModelFn = getModel,
+    getModelOptions: getModelOptionsFn = getModelOptions,
   } = {}
 ) {
   let watcher;
@@ -100,20 +101,32 @@ function setupUI(
 
   const modelSelect = doc.getElementById('model-switcher');
   if (modelSelect) {
+    const opts = getModelOptionsFn();
+    modelSelect.innerHTML = '';
+    for (const m of opts) {
+      const opt = doc.createElement('option');
+      opt.value = m;
+      opt.textContent = m.split('/').pop();
+      modelSelect.appendChild(opt);
+    }
     const applyModel = (model) => {
       setModelFn(model);
       try {
         if (doc.defaultView && doc.defaultView.localStorage) {
           doc.defaultView.localStorage.setItem('model', model);
         }
-      } catch {}
+      } catch {
+        /* ignore */
+      }
     };
     let model = getModelFn();
     try {
       if (doc.defaultView && doc.defaultView.localStorage) {
         model = doc.defaultView.localStorage.getItem('model') || model;
       }
-    } catch {}
+    } catch {
+      /* ignore */
+    }
     modelSelect.value = model;
     applyModel(model);
     modelSelect.onchange = () => applyModel(modelSelect.value);
@@ -129,12 +142,16 @@ function setupUI(
         if (monacoLib && monacoLib.editor) {
           monacoLib.editor.setTheme(theme === 'dark' ? 'vs-dark' : 'vs');
         }
-      } catch {}
+      } catch {
+        /* ignore */
+      }
       try {
         if (doc.defaultView && doc.defaultView.localStorage) {
           doc.defaultView.localStorage.setItem('theme', theme);
         }
-      } catch {}
+      } catch {
+        /* ignore */
+      }
       if (themeIcon) {
         themeIcon.setAttribute(
           'data-feather',
@@ -144,7 +161,9 @@ function setupUI(
           if (doc.defaultView && doc.defaultView.feather) {
             doc.defaultView.feather.replace();
           }
-        } catch {}
+        } catch {
+          /* ignore */
+        }
       }
     };
     let theme = 'dark';
@@ -152,7 +171,9 @@ function setupUI(
       if (doc.defaultView && doc.defaultView.localStorage) {
         theme = doc.defaultView.localStorage.getItem('theme') || 'dark';
       }
-    } catch {}
+    } catch {
+      /* ignore */
+    }
     applyTheme(theme);
     themeBtn.onclick = () => {
       const next = doc.body.classList.contains('dark') ? 'light' : 'dark';
