@@ -137,6 +137,21 @@ Synchronise the memory store with a remote URL:
 node cli/chatops.js sync https://example.com/memory.json
 ```
 
+## Cloud Sync Watcher
+
+Automatically keep your memory file in sync across devices. Use
+`startSyncWatcher(url, opts)` from `ai-service/sync-watcher.js` to periodically
+merge and upload changes:
+
+```javascript
+const { startSyncWatcher } = require('./ai-service/sync-watcher');
+
+const watcher = startSyncWatcher('https://example.com/memory.json', {
+  interval: 30000,
+});
+// Call watcher.stop() to disable syncing
+```
+
 ## Contributing
 
 Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.

@@ -32,7 +32,7 @@ This document outlines the proposed plan for developing the AI IDE.
    - Multi-agent code review ✅
    - UI tests ✅
 5. **v2.0 (16 wks)**
-   - Cloud sync across devices
+   - Cloud sync across devices _(started)_
    - Mobile companion app
    - ChatOps CLI for automation _(started)_
    - Code search indexing _(started)_
