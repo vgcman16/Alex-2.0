@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Alex Mobile</title>
+  <style>
+    body { font-family: sans-serif; padding: 1em; }
+    #history { border: 1px solid #ccc; padding: 0.5em; height: 200px; overflow-y: auto; white-space: pre-wrap; }
+    #input { width: 80%; }
+  </style>
+</head>
+<body>
+  <div id="history"></div>
+  <input id="input" placeholder="Type a message..." />
+  <button id="send">Send</button>
+  <script>
+    async function loadHistory() {
+      const res = await fetch('/memory');
+      const data = await res.json();
+      const hist = document.getElementById('history');
+      hist.textContent = data.map(e => `${e.role}: ${e.content}`).join('\n');
+    }
+    async function send() {
+      const input = document.getElementById('input');
+      const message = input.value.trim();
+      if (!message) return;
+      input.value = '';
+      const res = await fetch('/chat', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ message }) });
+      const data = await res.json();
+      await loadHistory();
+      const hist = document.getElementById('history');
+      hist.textContent += `\nassistant: ${data.response}`;
+    }
+    document.getElementById('send').addEventListener('click', send);
+    loadHistory();
+  </script>
+</body>
+</html>

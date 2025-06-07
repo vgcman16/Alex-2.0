@@ -42,4 +42,11 @@ describe('mobile server', () => {
     const res = await request(app).post('/chat').send({});
     expect(res.status).to.equal(400);
   });
+
+  it('serves static index', async () => {
+    const app = createServer({ memoryFile: file, runChat: async () => {} });
+    const res = await request(app).get('/');
+    expect(res.status).to.equal(200);
+    expect(res.text).to.include('<!doctype html>');
+  });
 });

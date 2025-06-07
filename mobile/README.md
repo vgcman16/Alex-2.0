@@ -6,6 +6,9 @@ It exposes two routes:
 - `GET /memory` – returns the stored conversation history.
 - `POST /chat` – sends a chat message and returns the assistant response.
 
+The server also serves a small web interface from `/` that you can open in a
+mobile browser to view the history and send messages.
+
 Run the server:
 
 ```bash
