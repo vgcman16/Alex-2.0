@@ -9,21 +9,39 @@
 </head>
 <body>
   <div id="container"></div>
-  <div style="position:absolute;bottom:0;width:100%;background:#222;color:#eee;padding:4px;">
-    <input id="chat-input" style="width:80%" placeholder="Ask the assistant" />
-    <button id="chat-send">Send</button>
-    <pre id="chat-output" style="white-space:pre-wrap;"></pre>
-  </div>
+    <div style="position:absolute;bottom:0;width:100%;background:#222;color:#eee;padding:4px;">
+      <input id="chat-input" style="width:70%" placeholder="Ask the assistant" />
+      <button id="chat-send">Send</button>
+      <button id="voice-btn">Voice</button>
+      <pre id="chat-output" style="white-space:pre-wrap;"></pre>
+    </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
   <script>
     const { runChat } = require('../chat');
-    const { createSharedMonaco } = require('../monaco-shared');
-    const { enableInlineCompletion } = require('../autocomplete');
-    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' } });
-    require(['vs/editor/editor.main'], function() {
-      const { editor } = createSharedMonaco(document.getElementById('container'));
-      enableInlineCompletion(editor);
+      const { createSharedMonaco } = require('../monaco-shared');
+      const { enableInlineCompletion } = require('../autocomplete');
+      const { createVoiceCoder } = require('../voice');
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' } });
+      require(['vs/editor/editor.main'], function() {
+        const { editor } = createSharedMonaco(document.getElementById('container'));
+        enableInlineCompletion(editor);
+        let voice;
+        document.getElementById('voice-btn').onclick = () => {
+          if (!voice) {
+            try {
+              voice = createVoiceCoder(editor);
+              voice.start();
+              document.getElementById('voice-btn').textContent = 'Stop';
+            } catch (err) {
+              alert(err.message);
+            }
+          } else {
+            voice.stop();
+            voice = null;
+            document.getElementById('voice-btn').textContent = 'Voice';
+          }
+        };
 
       document.getElementById('chat-send').onclick = async () => {
         const input = document.getElementById('chat-input');
