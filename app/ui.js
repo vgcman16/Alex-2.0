@@ -1,5 +1,6 @@
 const { runChatWithMemory } = require('./chat-memory');
 const { createVoiceCoder } = require('./voice');
+const { startSyncWatcher } = require('../ai-service/sync-watcher');
 
 function setupUI(
   doc,
@@ -7,8 +8,18 @@ function setupUI(
   {
     runChat: chatImpl = runChatWithMemory,
     createVoiceCoder: voiceCtor = createVoiceCoder,
+    startSyncWatcher: watcherCtor = startSyncWatcher,
   } = {}
 ) {
+  let watcher;
+  if (process.env.MEMORY_SYNC_URL && watcherCtor) {
+    watcher = watcherCtor(process.env.MEMORY_SYNC_URL, {
+      file: process.env.MEMORY_FILE,
+    });
+    if (doc.defaultView) {
+      doc.defaultView.addEventListener('beforeunload', () => watcher.stop());
+    }
+  }
   let voice;
   doc.getElementById('voice-btn').onclick = () => {
     if (!voice) {
