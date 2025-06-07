@@ -58,4 +58,29 @@ describe('UI integration', () => {
     expect(stopped).to.be.true;
     expect(btn.textContent).to.equal('Voice');
   });
+
+  it('starts sync watcher when MEMORY_SYNC_URL set', () => {
+    const doc = createDom();
+    process.env.MEMORY_SYNC_URL = 'https://remote';
+    process.env.MEMORY_FILE = 'm.json';
+    let args;
+    let stopped = false;
+    setupUI(
+      doc,
+      {},
+      {
+        runChat: async () => {},
+        createVoiceCoder: () => ({ start() {}, stop() {} }),
+        startSyncWatcher: (url, opts) => {
+          args = `${url}|${opts.file}`;
+          return { stop: () => { stopped = true; } };
+        },
+      }
+    );
+    expect(args).to.equal('https://remote|m.json');
+    doc.defaultView.dispatchEvent(new doc.defaultView.Event('beforeunload'));
+    expect(stopped).to.be.true;
+    delete process.env.MEMORY_SYNC_URL;
+    delete process.env.MEMORY_FILE;
+  });
 });
