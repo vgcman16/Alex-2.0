@@ -33,7 +33,7 @@ This document outlines the proposed plan for developing the AI IDE.
    - UI tests ✅
 5. **v2.0 (16 wks)**
    - Cloud sync across devices _(started)_
-   - Mobile companion app
+   - Mobile companion app _(started)_
    - ChatOps CLI for automation _(started)_
    - Code search indexing _(started)_
    - GPU-accelerated local inference _(started)_

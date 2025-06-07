@@ -37,6 +37,20 @@ describe('mobile server', () => {
     ]);
   });
 
+  it('syncs memory when syncUrl provided', async () => {
+    let urlArg;
+    const app = createServer({
+      memoryFile: file,
+      runChat: async (_m, t) => t('x'),
+      syncUrl: 'https://remote',
+      syncFn: async (url, f) => {
+        urlArg = `${url}|${f}`;
+      },
+    });
+    await request(app).post('/chat').send({ message: 'hi' });
+    expect(urlArg).to.equal(`https://remote|${file}`);
+  });
+
   it('validates chat input', async () => {
     const app = createServer({ memoryFile: file, runChat: async () => {} });
     const res = await request(app).post('/chat').send({});

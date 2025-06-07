@@ -1,6 +1,7 @@
 const express = require('express');
 const { load, append } = require('../ai-service/memory-store');
 const { runChat } = require('../app/chat');
+const { syncMemory } = require('../ai-service/cloud-sync');
 
 const { join } = require('path');
 
@@ -8,6 +9,8 @@ function createServer({
   runChat: chatImpl = runChat,
   memoryFile = 'memory.json',
   staticDir = join(__dirname, 'public'),
+  syncUrl,
+  syncFn = syncMemory,
 } = {}) {
   const app = express();
   app.use(express.json());
@@ -29,6 +32,13 @@ function createServer({
       await chatImpl(messages, (tok) => (responseText += tok));
       append({ role: 'user', content: message }, memoryFile);
       append({ role: 'assistant', content: responseText }, memoryFile);
+      if (syncUrl) {
+        try {
+          await syncFn(syncUrl, memoryFile);
+        } catch (err) {
+          console.error('sync error:', err.message);
+        }
+      }
       res.json({ response: responseText });
     } catch (err) {
       res.status(500).json({ error: err.message });
