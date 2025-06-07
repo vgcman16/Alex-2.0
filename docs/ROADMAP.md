@@ -18,9 +18,9 @@ This document outlines the proposed plan for developing the AI IDE.
    - Inline autocomplete ✅
    - Dev container and CI pipeline ✅
 2. **Beta (8 wks)**
-   - Autonomous agent to run tasks and create PRs
+   - Autonomous agent to run tasks and create PRs ✅
    - Cost dashboard with OpenRouter headers ✅
-   - Real-time collaboration via Yjs
+   - Real-time collaboration via Yjs ✅
 3. **v1.0 (12 wks)**
    - Local model runner integration
    - Extension marketplace and plugin API
