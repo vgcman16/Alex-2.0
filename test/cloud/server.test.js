@@ -35,4 +35,13 @@ describe('cloud memory server', () => {
     const res = await request(app).put('/memory').send({});
     expect(res.status).to.equal(400);
   });
+
+  it('clears memory via DELETE', async () => {
+    fs.writeFileSync(file, '[{"a":1}]');
+    const app = createServer({ memoryFile: file });
+    const res = await request(app).delete('/memory');
+    expect(res.status).to.equal(200);
+    const data = fs.readFileSync(file, 'utf8');
+    expect(data).to.equal('[]');
+  });
 });

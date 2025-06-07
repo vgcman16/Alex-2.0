@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const { load, append } = require('../ai-service/memory-store');
 const { runChat } = require('../app/chat');
 const { syncMemory } = require('../ai-service/cloud-sync');
@@ -40,6 +41,22 @@ function createServer({
         }
       }
       res.json({ response: responseText });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.delete('/memory', async (req, res) => {
+    try {
+      fs.writeFileSync(memoryFile, '[]');
+      if (syncUrl) {
+        try {
+          await syncFn(syncUrl, memoryFile);
+        } catch (err) {
+          console.error('sync error:', err.message);
+        }
+      }
+      res.json({ ok: true });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
