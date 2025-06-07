@@ -102,6 +102,24 @@ describe('chatops CLI', () => {
     expect(code).to.equal(0);
   });
 
+  it('shows telemetry info', async () => {
+    let printed = [];
+    const oldLog = console.log;
+    console.log = (msg) => printed.push(msg);
+    const code = await main(['telemetry'], {
+      eventCountsFn: () => ({ start: 2 }),
+      costFn: () => 1.5,
+      planFn: async () => {},
+      syncFn: async () => {},
+      uploadFn: async () => {},
+      downloadFn: async () => {},
+      watchFn: async () => {},
+    });
+    console.log = oldLog;
+    expect(printed).to.deep.equal(['start: 2', 'Total cost: 1.5']);
+    expect(code).to.equal(0);
+  });
+
   it('returns error on unknown command', async () => {
     const code = await main(['unknown'], {
       planFn: async () => {},

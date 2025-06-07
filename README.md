@@ -180,6 +180,12 @@ Search code for a word:
 node cli/chatops.js search TODO src
 ```
 
+View telemetry event counts and total cost:
+
+```bash
+node cli/chatops.js telemetry
+```
+
 ## Cloud Sync Watcher
 
 Automatically keep your memory file in sync across devices. Use
