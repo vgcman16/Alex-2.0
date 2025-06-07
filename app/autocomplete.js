@@ -1,7 +1,13 @@
 const { streamChatCompletion } = require('../ai-service/openrouter');
 const { runLlama } = require('../ai-service/llama');
 
-async function fetchCompletion(prefix, { streamChatCompletion: stream = streamChatCompletion, runLlama: llama = runLlama } = {}) {
+async function fetchCompletion(
+  prefix,
+  {
+    streamChatCompletion: stream = streamChatCompletion,
+    runLlama: llama = runLlama,
+  } = {}
+) {
   const apiKey = process.env.OPENROUTER_API_KEY;
   const messages = [{ role: 'user', content: prefix }];
   if (apiKey) {
@@ -9,7 +15,7 @@ async function fetchCompletion(prefix, { streamChatCompletion: stream = streamCh
     for await (const chunk of stream({
       messages,
       models: ['openrouter/openai/gpt-3.5-turbo'],
-      apiKey
+      apiKey,
     })) {
       const content = chunk.choices?.[0]?.delta?.content;
       if (content) result += content;
@@ -30,7 +36,7 @@ function enableInlineCompletion(editor) {
         startLineNumber: 1,
         startColumn: 1,
         endLineNumber: position.lineNumber,
-        endColumn: position.column
+        endColumn: position.column,
       });
       try {
         const text = await fetchCompletion(prefix);
@@ -39,15 +45,20 @@ function enableInlineCompletion(editor) {
           items: [
             {
               insertText: text,
-              range: new monaco.Range(position.lineNumber, position.column, position.lineNumber, position.column),
-            }
-          ]
+              range: new monaco.Range(
+                position.lineNumber,
+                position.column,
+                position.lineNumber,
+                position.column
+              ),
+            },
+          ],
         };
       } catch {
         return { items: [] };
       }
     },
-    freeInlineCompletions() {}
+    freeInlineCompletions() {},
   };
   monaco.languages.registerInlineCompletionsProvider('javascript', provider);
 

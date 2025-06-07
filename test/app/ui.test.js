@@ -12,10 +12,17 @@ describe('UI integration', () => {
   it('sends chat and displays response', async () => {
     const doc = createDom();
     let messages;
-    setupUI(doc, {}, {
-      runChat: async (msgs, onToken) => { messages = msgs; onToken('hi'); },
-      createVoiceCoder: () => ({ start() {}, stop() {} })
-    });
+    setupUI(
+      doc,
+      {},
+      {
+        runChat: async (msgs, onToken) => {
+          messages = msgs;
+          onToken('hi');
+        },
+        createVoiceCoder: () => ({ start() {}, stop() {} }),
+      }
+    );
     doc.getElementById('chat-input').value = 'hello';
     await doc.getElementById('chat-send').onclick();
     expect(messages).to.deep.equal([{ role: 'user', content: 'hello' }]);
@@ -27,11 +34,22 @@ describe('UI integration', () => {
     const doc = createDom();
     let started = false;
     let stopped = false;
-    const voice = { start: () => { started = true; }, stop: () => { stopped = true; } };
-    setupUI(doc, {}, {
-      runChat: async () => {},
-      createVoiceCoder: () => voice
-    });
+    const voice = {
+      start: () => {
+        started = true;
+      },
+      stop: () => {
+        stopped = true;
+      },
+    };
+    setupUI(
+      doc,
+      {},
+      {
+        runChat: async () => {},
+        createVoiceCoder: () => voice,
+      }
+    );
     const btn = doc.getElementById('voice-btn');
     btn.onclick();
     expect(started).to.be.true;

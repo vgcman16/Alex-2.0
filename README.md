@@ -16,6 +16,7 @@ and the `ws` package provides a WebSocket polyfill (loaded in
    cd Alex-2.0
    ```
 2. Install the Node dependencies:
+
    ```bash
    npm install
    ```
@@ -143,7 +144,6 @@ Or clone normally and pull LFS objects afterwards:
 git clone <repository-url>
 git lfs pull
 ```
-
 
 ## License
 

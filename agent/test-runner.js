@@ -14,6 +14,7 @@ function run(cmd, args, cwd) {
  */
 function runTests({ repo = '.', retries = 0, exec = run } = {}) {
   let attempt = 0;
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     attempt++;
     const res = exec('npm', ['test'], repo);
@@ -25,4 +26,3 @@ function runTests({ repo = '.', retries = 0, exec = run } = {}) {
 }
 
 module.exports = { runTests };
-

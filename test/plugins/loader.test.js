@@ -7,7 +7,10 @@ const { loadPlugins } = require('../../plugins/loader');
 describe('loadPlugins', () => {
   it('calls activate on each plugin', () => {
     const dir = fs.mkdtempSync(join(os.tmpdir(), 'plugins-'));
-    fs.writeFileSync(join(dir, 'a.js'), 'module.exports.activate = ctx => { ctx.a = true; };');
+    fs.writeFileSync(
+      join(dir, 'a.js'),
+      'module.exports.activate = ctx => { ctx.a = true; };'
+    );
     const context = {};
     loadPlugins(dir, context);
     expect(context.a).to.equal(true);

@@ -13,7 +13,7 @@ describe('fetchCompletion', () => {
   it('concatenates streamed chunks', async () => {
     process.env.OPENROUTER_API_KEY = 'test';
     const result = await fetchCompletion('foo', {
-      streamChatCompletion: () => mockStream(['bar', ' baz'])
+      streamChatCompletion: () => mockStream(['bar', ' baz']),
     });
     expect(result).to.equal('bar baz');
   });
@@ -24,7 +24,9 @@ describe('fetchCompletion', () => {
     delete process.env.LLAMA_MODEL;
     let err;
     try {
-      await fetchCompletion('foo', { streamChatCompletion: () => mockStream([]) });
+      await fetchCompletion('foo', {
+        streamChatCompletion: () => mockStream([]),
+      });
     } catch (e) {
       err = e;
     }
@@ -37,7 +39,7 @@ describe('fetchCompletion', () => {
     process.env.LLAMA_PATH = '/bin/llama';
     process.env.LLAMA_MODEL = 'model.gguf';
     const result = await fetchCompletion('foo', {
-      runLlama: async () => 'local'
+      runLlama: async () => 'local',
     });
     expect(result).to.equal('local');
   });

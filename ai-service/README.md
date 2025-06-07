@@ -27,7 +27,10 @@ const { streamChatCompletion } = require('./openrouter');
   const messages = [{ role: 'user', content: 'Hello!' }];
   for await (const chunk of streamChatCompletion({
     messages,
-    models: ['openrouter/openai/gpt-3.5-turbo', 'openrouter/mistralai/mistral-7b'],
+    models: [
+      'openrouter/openai/gpt-3.5-turbo',
+      'openrouter/mistralai/mistral-7b',
+    ],
     apiKey: process.env.OPENROUTER_API_KEY,
   })) {
     console.log(chunk);

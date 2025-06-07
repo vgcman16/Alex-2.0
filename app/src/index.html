@@ -1,32 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <title>Monaco Editor</title>
-  <style>
-    html, body, #container { height: 100%; margin: 0; }
-  </style>
-</head>
-<body>
-  <div id="container"></div>
-    <div style="position:absolute;bottom:0;width:100%;background:#222;color:#eee;padding:4px;">
-      <input id="chat-input" style="width:70%" placeholder="Ask the assistant" />
+  <head>
+    <meta charset="utf-8" />
+    <title>Monaco Editor</title>
+    <style>
+      html,
+      body,
+      #container {
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div
+      style="
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: #222;
+        color: #eee;
+        padding: 4px;
+      "
+    >
+      <input
+        id="chat-input"
+        style="width: 70%"
+        placeholder="Ask the assistant"
+      />
       <button id="chat-send">Send</button>
       <button id="voice-btn">Voice</button>
-      <pre id="chat-output" style="white-space:pre-wrap;"></pre>
+      <pre id="chat-output" style="white-space: pre-wrap"></pre>
     </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
-  <script>
-    const { createSharedMonaco } = require('../monaco-shared');
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+    <script>
+      const { createSharedMonaco } = require('../monaco-shared');
       const { enableInlineCompletion } = require('../autocomplete');
       const { setupUI } = require('../ui');
-      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' } });
-      require(['vs/editor/editor.main'], function() {
-        const { editor } = createSharedMonaco(document.getElementById('container'));
+      require.config({
+        paths: {
+          vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs',
+        },
+      });
+      require(['vs/editor/editor.main'], function () {
+        const { editor } = createSharedMonaco(
+          document.getElementById('container')
+        );
         enableInlineCompletion(editor);
         setupUI(document, editor);
       });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

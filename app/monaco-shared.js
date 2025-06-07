@@ -1,6 +1,6 @@
-const { initYjs } = require('./yjs-webrtc')
-const { MonacoBinding } = require('y-monaco')
-const monaco = require('monaco-editor')
+const { initYjs } = require('./yjs-webrtc');
+const { MonacoBinding } = require('y-monaco');
+const monaco = require('monaco-editor');
 
 /**
  * Create a Monaco editor bound to a shared Yjs document.
@@ -10,31 +10,33 @@ const monaco = require('monaco-editor')
  * @returns {{editor: monaco.editor.IStandaloneCodeEditor, provider: any}}
  */
 function createSharedMonaco(element, room = 'monaco-room') {
-  const { doc, provider } = initYjs(room)
-  const { awareness } = provider
-  const yText = doc.getText('monaco')
-  const model = monaco.editor.createModel('', 'javascript')
+  const { doc, provider } = initYjs(room);
+  const { awareness } = provider;
+  const yText = doc.getText('monaco');
+  const model = monaco.editor.createModel('', 'javascript');
   const editor = monaco.editor.create(element, {
     model,
     language: 'javascript',
     theme: 'vs-dark',
-  })
+  });
 
   // assign random user colour and name for presence
   const user = {
     name: `User-${doc.clientID}`,
-    color: `#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')}`
-  }
-  awareness.setLocalStateField('user', user)
+    color: `#${Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padStart(6, '0')}`,
+  };
+  awareness.setLocalStateField('user', user);
 
   const applyStyles = (clientId, info) => {
-    if (!info || !info.color || !info.name) return
-    const id = `yjs-style-${clientId}`
-    let style = document.getElementById(id)
+    if (!info || !info.color || !info.name) return;
+    const id = `yjs-style-${clientId}`;
+    let style = document.getElementById(id);
     if (!style) {
-      style = document.createElement('style')
-      style.id = id
-      document.head.appendChild(style)
+      style = document.createElement('style');
+      style.id = id;
+      document.head.appendChild(style);
     }
     style.textContent = `
       .yRemoteSelection-${clientId} { background-color: ${info.color}33; }
@@ -51,22 +53,22 @@ function createSharedMonaco(element, room = 'monaco-room') {
         border-radius: 4px;
         white-space: nowrap;
       }
-    `
-  }
+    `;
+  };
 
   // apply styles for existing peers and listen for new ones
   awareness.getStates().forEach((state, id) => {
-    if (id !== doc.clientID) applyStyles(id, state.user)
-  })
+    if (id !== doc.clientID) applyStyles(id, state.user);
+  });
   awareness.on('update', ({ added, updated }) => {
-    const states = awareness.getStates()
+    const states = awareness.getStates();
     for (const id of [...added, ...updated]) {
-      if (id !== doc.clientID) applyStyles(id, states.get(id).user)
+      if (id !== doc.clientID) applyStyles(id, states.get(id).user);
     }
-  })
+  });
 
-  new MonacoBinding(yText, model, new Set([editor]), awareness)
-  return { editor, provider }
+  new MonacoBinding(yText, model, new Set([editor]), awareness);
+  return { editor, provider };
 }
 
-module.exports = { createSharedMonaco }
+module.exports = { createSharedMonaco };

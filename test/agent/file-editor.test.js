@@ -15,11 +15,19 @@ describe('editFiles', () => {
     execSync('git add a.txt', { cwd: dir });
     execSync('git commit -m init', { cwd: dir });
 
-    editFiles({ repo: dir, branch: 'feature/test', files: { 'a.txt': 'b', 'b.txt': 'c' } });
+    editFiles({
+      repo: dir,
+      branch: 'feature/test',
+      files: { 'a.txt': 'b', 'b.txt': 'c' },
+    });
 
-    const head = execSync('git rev-parse --abbrev-ref HEAD', { cwd: dir }).toString().trim();
+    const head = execSync('git rev-parse --abbrev-ref HEAD', { cwd: dir })
+      .toString()
+      .trim();
     expect(head).to.equal('feature/test');
-    const status = execSync('git status --porcelain', { cwd: dir }).toString().trim();
+    const status = execSync('git status --porcelain', { cwd: dir })
+      .toString()
+      .trim();
     expect(status).to.equal('');
     const content = fs.readFileSync(join(dir, 'a.txt'), 'utf8');
     expect(content).to.equal('b');

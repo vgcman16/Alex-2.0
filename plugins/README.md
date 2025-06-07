@@ -1,4 +1,5 @@
 # Plugins
+
 This directory is for optional plugin modules that extend functionality.
 
 A plugin exports an `activate(context)` function. The context object is shared

@@ -30,7 +30,7 @@ async function* streamChatCompletion({ messages, models, apiKey }) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
+          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({ model, messages, stream: true }),
         signal: controller.signal,
