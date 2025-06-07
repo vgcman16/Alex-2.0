@@ -65,7 +65,7 @@ The current structure is intentionally lightweight. It includes only a README fi
 
 ## Real-time Editing Demo
 
-The `app` folder now contains a small module for initializing a [Yjs](https://yjs.dev/) document using the WebRTC provider. A helper binds the shared document to the Monaco editor.
+The `app` folder now contains a small module for initializing a [Yjs](https://yjs.dev/) document using the WebRTC provider. A helper binds the shared document to the Monaco editor and exposes remote cursor presence.
 
 Run a manual sync test to see two peers share text data:
 

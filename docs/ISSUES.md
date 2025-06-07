@@ -28,10 +28,10 @@ This file lists proposed epics and issues for delivering the AI IDE.
   - Acceptance: Tests pass before PR is created.
 
 ## Epic: Collaboration
-- **Issue: Yjs Sync**
+- **Issue: Yjs Sync** ✅
   - Connect multiple peers using WebRTC provider.
   - Acceptance: Text edits propagate between two windows.
-- **Issue: Presence Cursors**
+- **Issue: Presence Cursors** ✅
   - Display remote cursor positions.
   - Acceptance: See name/colour of remote user.
 

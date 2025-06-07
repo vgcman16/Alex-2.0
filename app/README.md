@@ -15,4 +15,5 @@ npm test
 ```
 
 The test creates two peers in the same process. Text inserted on one peer is
-synced to the other peer via WebRTC.
+synced to the other peer via WebRTC. Remote cursor positions appear with the
+peer's name and a unique colour.
