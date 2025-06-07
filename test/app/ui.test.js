@@ -4,8 +4,8 @@ const { setupUI } = require('../../app/ui');
 
 describe('UI integration', () => {
   function createDom() {
-    const html = `<!DOCTYPE html><div id="container"></div><input id="chat-input"><button id="chat-send">Send</button><button id="voice-btn">Voice</button><pre id="chat-output"></pre>`;
-    const dom = new JSDOM(html);
+    const html = `<!DOCTYPE html><div id="container"></div><input id="chat-input"><button id="chat-send">Send</button><button id="voice-btn">Voice</button><button id="theme-toggle">Light</button><pre id="chat-output"></pre>`;
+    const dom = new JSDOM(html, { url: 'http://localhost' });
     return dom.window.document;
   }
 
@@ -73,7 +73,11 @@ describe('UI integration', () => {
         createVoiceCoder: () => ({ start() {}, stop() {} }),
         startSyncWatcher: (url, opts) => {
           args = `${url}|${opts.file}`;
-          return { stop: () => { stopped = true; } };
+          return {
+            stop: () => {
+              stopped = true;
+            },
+          };
         },
       }
     );
@@ -82,5 +86,23 @@ describe('UI integration', () => {
     expect(stopped).to.be.true;
     delete process.env.MEMORY_SYNC_URL;
     delete process.env.MEMORY_FILE;
+  });
+
+  it('toggles theme on button click', () => {
+    const doc = createDom();
+    setupUI(
+      doc,
+      {},
+      {
+        runChat: async () => {},
+        createVoiceCoder: () => ({ start() {}, stop() {} }),
+      }
+    );
+    const btn = doc.getElementById('theme-toggle');
+    expect(doc.body.classList.contains('dark')).to.be.true;
+    btn.onclick();
+    expect(doc.body.classList.contains('light')).to.be.true;
+    btn.onclick();
+    expect(doc.body.classList.contains('dark')).to.be.true;
   });
 });
