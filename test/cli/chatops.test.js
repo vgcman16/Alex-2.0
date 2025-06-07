@@ -16,31 +16,31 @@ describe('chatops CLI', () => {
   });
 
   it('runs sync command', async () => {
-    let urlArg;
-    const code = await main(['sync', 'https://ex'], {
+    let args;
+    const code = await main(['sync', 'https://ex', '/tmp/mem.json'], {
       planFn: async () => 'x',
-      syncFn: async (url) => {
-        urlArg = url;
+      syncFn: async (url, file) => {
+        args = `${url}|${file}`;
       },
       watchFn: async () => {},
     });
-    expect(urlArg).to.equal('https://ex');
+    expect(args).to.equal('https://ex|/tmp/mem.json');
     expect(code).to.equal(0);
   });
 
   it('starts watch command', async () => {
-    let urlArg;
+    let args;
     let called = false;
-    const code = await main(['watch', 'https://ex'], {
+    const code = await main(['watch', 'https://ex', '/tmp/mem.json'], {
       planFn: async () => {},
       syncFn: async () => {},
-      watchFn: (url) => {
-        urlArg = url;
+      watchFn: (url, opts) => {
+        args = `${url}|${opts.file}`;
         called = true;
         return { stop() {} };
       },
     });
-    expect(urlArg).to.equal('https://ex');
+    expect(args).to.equal('https://ex|/tmp/mem.json');
     expect(called).to.be.true;
     expect(code).to.equal(0);
   });

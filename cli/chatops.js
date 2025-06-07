@@ -32,12 +32,13 @@ async function main(
   }
   if (cmd === 'sync') {
     const url = args[0];
+    const file = args[1];
     if (!url) {
-      console.error('Usage: chatops sync <url>');
+      console.error('Usage: chatops sync <url> [file]');
       return 1;
     }
     try {
-      await syncFn(url);
+      await syncFn(url, file);
       console.log('Sync complete');
       return 0;
     } catch (err) {
@@ -47,12 +48,13 @@ async function main(
   }
   if (cmd === 'watch') {
     const url = args[0];
+    const file = args[1];
     if (!url) {
-      console.error('Usage: chatops watch <url>');
+      console.error('Usage: chatops watch <url> [file]');
       return 1;
     }
     try {
-      watchFn(url);
+      watchFn(url, { file });
       console.log('Watcher started');
       return 0;
     } catch (err) {

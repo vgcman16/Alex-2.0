@@ -134,13 +134,13 @@ node cli/chatops.js plan "add feature"
 Synchronise the memory store with a remote URL:
 
 ```bash
-node cli/chatops.js sync https://example.com/memory.json
+node cli/chatops.js sync https://example.com/memory.json path/to/memory.json
 ```
 
 Start a background watcher to periodically sync:
 
 ```bash
-node cli/chatops.js watch https://example.com/memory.json
+node cli/chatops.js watch https://example.com/memory.json path/to/memory.json
 ```
 
 Search code for a word:
@@ -160,6 +160,7 @@ const { startSyncWatcher } = require('./ai-service/sync-watcher');
 
 const watcher = startSyncWatcher('https://example.com/memory.json', {
   interval: 30000,
+  file: 'path/to/memory.json',
 });
 // Call watcher.stop() to disable syncing
 ```
