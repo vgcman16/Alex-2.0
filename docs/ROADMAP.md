@@ -23,10 +23,18 @@ This document outlines the proposed plan for developing the AI IDE.
    - Autonomous agent to run tasks and create PRs ✅
    - Cost dashboard with OpenRouter headers ✅
    - Real-time collaboration via Yjs ✅
+   - Test runner loop and built-in shell
+   - Reasoning log with approval step before edits
+   - Context-aware chat with code search
 3. **v1.0 (12 wks)**
    - Local model runner integration ✅
    - Extension marketplace and plugin API ✅
    - Persistent memory store ✅
+   - Windows NSIS installer and winget manifest
+   - Status-bar model switcher with routing rules
+   - Opt-in telemetry via OpenTelemetry
+   - Long-term project wiki memory
+   - Security hardening and self-host option
 4. **v1.1+**
    - Voice coding ✅
    - Multi-agent code review ✅
@@ -40,6 +48,14 @@ This document outlines the proposed plan for developing the AI IDE.
 
 ## Next Steps
 
+- 3-pane layout with diff viewer and one-click patch apply
+- Light and dark themes with modern icons
+- Model flexibility via status bar switcher
+- Windows installer auto-update and winget manifest
+- Telemetry dashboard and cost tracking
+- Sample extension and model plugin
+- Architecture diagram and contribution guide
+- Demo GIFs and screenshots of core flows
 - Continued polish of the mobile UI
 - Packaging and installers for each platform
 - Enhanced GPU offloading options
