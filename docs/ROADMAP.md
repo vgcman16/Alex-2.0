@@ -27,7 +27,7 @@ This document outlines the proposed plan for developing the AI IDE.
    - Persistent memory store ✅
 4. **v1.1+**
    - Voice coding ✅
-   - Multi-agent code review
+   - Multi-agent code review ✅
    - UI tests
 5. **v2.0 (16 wks)**
    - Cloud sync across devices
