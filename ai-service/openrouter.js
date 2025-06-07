@@ -12,6 +12,8 @@ const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
  * @param {string} apiKey OpenRouter API key
  * @returns {AsyncGenerator<Object>} async generator yielding completion deltas
  */
+const { recordUsage } = require('./cost-dashboard');
+
 async function* streamChatCompletion({ messages, models, apiKey }) {
   if (!apiKey) {
     throw new Error('OPENROUTER_API_KEY is required');
@@ -40,6 +42,7 @@ async function* streamChatCompletion({ messages, models, apiKey }) {
       const reader = response.body.getReader();
       const decoder = new TextDecoder('utf-8');
       let buffer = '';
+      let usage;
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
@@ -50,10 +53,19 @@ async function* streamChatCompletion({ messages, models, apiKey }) {
           buffer = buffer.slice(boundary + 2);
           if (chunk.startsWith('data:')) {
             const data = chunk.replace(/^data:\s*/, '');
-            if (data === '[DONE]') return;
-            yield JSON.parse(data);
+            if (data === '[DONE]') break;
+            const parsed = JSON.parse(data);
+            if (parsed.usage) {
+              usage = parsed.usage;
+            } else {
+              yield parsed;
+            }
           }
         }
+      }
+      if (usage) {
+        recordUsage(usage);
+        yield { usage };
       }
       return; // finished without [DONE]
     } catch (err) {
