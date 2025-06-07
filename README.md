@@ -112,6 +112,13 @@ Use `memory-store.js` to persist conversation history between sessions. The
 module provides `append(entry, file)` to record messages, `load(file)` to read
 them back, and `reset(file)` to clear the store.
 
+## Multi-agent Code Review
+
+The `review` function in `agent/code-reviewer.js` coordinates multiple AI
+reviewers. Pass a diff to `review(diff)` and receive comments from each
+configured reviewer. The default reviewers include a senior developer and a
+security expert.
+
 ## Contributing
 
 Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.
