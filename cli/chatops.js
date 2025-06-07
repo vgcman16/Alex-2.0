@@ -11,6 +11,8 @@ const {
   getEventCounts,
   getTotalCost,
 } = require('../ai-service/telemetry-dashboard');
+const { openShell } = require('../agent/shell');
+const { runTests } = require('../agent/test-runner');
 
 async function main(
   argv = process.argv.slice(2),
@@ -24,6 +26,8 @@ async function main(
     searchFn = searchIdx,
     eventCountsFn = getEventCounts,
     costFn = getTotalCost,
+    shellFn = openShell,
+    testFn = runTests,
   } = {}
 ) {
   const [cmd, ...args] = argv;
@@ -125,6 +129,20 @@ async function main(
       return 1;
     }
   }
+  if (cmd === 'shell') {
+    shellFn();
+    return 0;
+  }
+  if (cmd === 'test') {
+    const retries = parseInt(args[0] || '0', 10);
+    try {
+      testFn({ retries });
+      return 0;
+    } catch (err) {
+      console.error(err.message);
+      return 1;
+    }
+  }
   if (cmd === 'telemetry') {
     const counts = eventCountsFn();
     const total = costFn();
@@ -135,7 +153,9 @@ async function main(
     return 0;
   }
   console.error('Usage: chatops <command> [args...]');
-  console.error('Commands: plan, sync, upload, download, watch, search, telemetry');
+  console.error(
+    'Commands: plan, sync, upload, download, watch, search, shell, test, telemetry'
+  );
   return 1;
 }
 
