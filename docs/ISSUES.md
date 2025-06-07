@@ -36,7 +36,7 @@ This file lists proposed epics and issues for delivering the AI IDE.
   - Acceptance: See name/colour of remote user.
 
 ## Epic: Local Models
-- **Issue: Llama.cpp Integration**
+- **Issue: Llama.cpp Integration** ✅
   - Bundle GGUF weights and `llama.cpp` binaries.
   - Acceptance: Autocomplete works offline.
 

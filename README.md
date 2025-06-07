@@ -80,6 +80,17 @@ The test script spawns two Node processes that connect to the public signaling s
 
 Press `Ctrl+Space` in the editor to request an inline completion from the OpenRouter API. The suggestion appears directly at the cursor location.
 
+## Local Model Runner
+
+Alex 2.0 can also generate completions offline using [`llama.cpp`](https://github.com/ggerganov/llama.cpp). Set the `LLAMA_PATH` environment variable to the compiled binary and `LLAMA_MODEL` to your GGUF weights file.
+
+```bash
+export LLAMA_PATH=/path/to/main
+export LLAMA_MODEL=/path/to/model.gguf
+```
+
+The `runLlama` helper in `ai-service/llama.js` executes the binary and returns the generated text.
+
 ## Contributing
 
 Contributions are welcome! Fork the repository, create a new branch for your feature or bug fix, and submit a pull request. Please keep your commits concise and provide clear descriptions of your changes.
