@@ -28,7 +28,7 @@ This document outlines the proposed plan for developing the AI IDE.
 4. **v1.1+**
    - Voice coding ✅
    - Multi-agent code review ✅
-   - UI tests
+   - UI tests ✅
 5. **v2.0 (16 wks)**
    - Cloud sync across devices
    - Mobile companion app
