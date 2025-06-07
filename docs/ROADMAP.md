@@ -32,8 +32,14 @@ This document outlines the proposed plan for developing the AI IDE.
    - Multi-agent code review ✅
    - UI tests ✅
 5. **v2.0 (16 wks)**
-   - Cloud sync across devices _(started)_
-   - Mobile companion app _(started)_
-   - ChatOps CLI for automation _(started)_
-   - Code search indexing _(started)_
-   - GPU-accelerated local inference _(started)_
+   - Cloud sync across devices ✅
+   - Mobile companion app ✅
+   - ChatOps CLI for automation ✅
+   - Code search indexing ✅
+   - GPU-accelerated local inference ✅
+
+## Next Steps
+
+- Continued polish of the mobile UI
+- Packaging and installers for each platform
+- Enhanced GPU offloading options
