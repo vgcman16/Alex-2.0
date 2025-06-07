@@ -29,6 +29,32 @@ describe('sync watcher', () => {
     expect(clearedId).to.equal(timerIds[0]);
   });
 
+  it('watches file for changes', async () => {
+    let watchCb;
+    let unwatchArg;
+    const watcher = startSyncWatcher('u', {
+      interval: 5,
+      syncFn: async () => {
+        watchCb.called = true;
+      },
+      setTimer: () => 1,
+      clearTimer: () => {},
+      watchFile: (f, _opts, cb) => {
+        watchCb = cb;
+        expect(f).to.equal('memory.json');
+      },
+      unwatchFile: (f) => {
+        unwatchArg = f;
+      },
+      fetchFn: async () => new Response('[]', { status: 200 })
+    });
+    watchCb.called = false;
+    await watchCb();
+    expect(watchCb.called).to.be.true;
+    watcher.stop();
+    expect(unwatchArg).to.equal('memory.json');
+  });
+
   it('swallows errors from sync', async () => {
     let fn;
     const watcher = startSyncWatcher('u', {
