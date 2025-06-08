@@ -2,12 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Monaco Editor</title>
+    <title>Alex IDE</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         --bg-color: #121212;
         --text-color: #eee;
         --bar-bg: #222;
+        --accent-color: #0d6efd;
+        --radius: 4px;
       }
       body.light {
         --bg-color: #fff;
@@ -24,10 +30,19 @@
         flex-direction: column;
         background: var(--bg-color);
         color: var(--text-color);
+        font-family: 'Inter', sans-serif;
+      }
+      #title-bar {
+        padding: 8px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        background: var(--bar-bg);
       }
       #main {
         flex: 1;
         display: flex;
+        gap: 8px;
+        padding: 8px;
       }
       #patch-pane,
       #editor-pane,
@@ -35,20 +50,63 @@
         flex: 1;
         display: flex;
         flex-direction: column;
+        gap: 8px;
       }
       #container,
       #diff-editor {
         flex: 1;
+        border: 1px solid #444;
+        border-radius: var(--radius);
       }
       #patch-input {
         flex: 1;
+        font-family: 'Fira Code', monospace;
+        background: var(--bg-color);
+        color: var(--text-color);
+        border: 1px solid #444;
+        border-radius: var(--radius);
+        padding: 8px;
       }
       #model-switcher {
         margin: 0 4px;
+        background: var(--bar-bg);
+        color: var(--text-color);
+        border: 1px solid #444;
+        border-radius: var(--radius);
+        padding: 4px;
+      }
+      button {
+        background: var(--accent-color);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius);
+        padding: 4px 8px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      #chat-bar {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 8px;
+        background: var(--bar-bg);
+        color: var(--text-color);
+      }
+      #chat-input {
+        flex: 1;
+        font-family: 'Fira Code', monospace;
+        background: var(--bg-color);
+        color: var(--text-color);
+        border: 1px solid #444;
+        border-radius: var(--radius);
+        padding: 4px;
       }
     </style>
   </head>
   <body>
+    <div id="title-bar">Alex IDE</div>
     <div id="main">
       <div id="patch-pane">
         <textarea id="patch-input" placeholder="Patch text"></textarea>
@@ -63,15 +121,8 @@
         <div id="diff-editor"></div>
       </div>
     </div>
-    <div
-      id="chat-bar"
-      style="background: var(--bar-bg); color: var(--text-color); padding: 4px"
-    >
-      <input
-        id="chat-input"
-        style="width: 70%"
-        placeholder="Ask the assistant"
-      />
+    <div id="chat-bar">
+      <input id="chat-input" placeholder="Ask the assistant" />
       <button id="chat-send"><i data-feather="send"></i></button>
       <button id="voice-btn">
         <i data-feather="mic"></i><span>Voice</span>
